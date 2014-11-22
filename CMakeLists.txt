@@ -9,6 +9,7 @@ target_architecture(ARCH)
 set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR}/out)
 
 add_subdirectory(sqlite)
+add_subdirectory(zlib)
 
 set(CPACK_GENERATOR ZIP)
 include(CPack)
