@@ -13,6 +13,7 @@ add_subdirectory(Box2D-2.3.0)
 add_subdirectory(tinyxml2-2.1.0)
 add_subdirectory(glew-1.10.0)
 add_subdirectory(lua-5.2.3)
+add_subdirectory(openal-1.16.0)
 
 # zlib must be built before png
 add_subdirectory(zlib-1.2.8)

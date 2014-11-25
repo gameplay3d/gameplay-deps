@@ -20,7 +20,7 @@ INCLUDE(CheckSymbolExists)
 INCLUDE(CheckCCompilerFlag)
 INCLUDE(CheckCSourceCompiles)
 INCLUDE(CheckTypeSize)
-include(CheckFileOffsetBits)
+# include(CheckFileOffsetBits)
 
 
 SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS TRUE)
@@ -30,13 +30,13 @@ OPTION(ALSOFT_DLOPEN  "Check for the dlopen API for loading optional libs"  ON)
 
 OPTION(ALSOFT_WERROR  "Treat compile warnings as errors"      OFF)
 
-OPTION(ALSOFT_UTILS          "Build and install utility programs"         ON)
+OPTION(ALSOFT_UTILS          "Build and install utility programs"         OFF)
 OPTION(ALSOFT_NO_CONFIG_UTIL "Disable building the alsoft-config utility" OFF)
 
-OPTION(ALSOFT_EXAMPLES  "Build and install example programs"  ON)
+OPTION(ALSOFT_EXAMPLES  "Build and install example programs"  OFF)
 
-OPTION(ALSOFT_CONFIG "Install alsoft.conf sample configuration file" ON)
-OPTION(ALSOFT_HRTF_DEFS "Install HRTF definition files" ON)
+OPTION(ALSOFT_CONFIG "Install alsoft.conf sample configuration file" OFF)
+OPTION(ALSOFT_HRTF_DEFS "Install HRTF definition files" OFF)
 
 
 IF(WIN32)
@@ -67,11 +67,11 @@ ELSE()
 ENDIF()
 
 # Set defines for large file support
-CHECK_FILE_OFFSET_BITS()
-IF(_FILE_OFFSET_BITS)
-    ADD_DEFINITIONS(-D_FILE_OFFSET_BITS=${_FILE_OFFSET_BITS})
-    SET(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -D_FILE_OFFSET_BITS=${_FILE_OFFSET_BITS}")
-ENDIF()
+#CHECK_FILE_OFFSET_BITS()
+#IF(_FILE_OFFSET_BITS)
+#    ADD_DEFINITIONS(-D_FILE_OFFSET_BITS=${_FILE_OFFSET_BITS})
+#    SET(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -D_FILE_OFFSET_BITS=${_FILE_OFFSET_BITS}")
+#ENDIF()
 ADD_DEFINITIONS(-D_LARGEFILE_SOURCE -D_LARGE_FILES)
 SET(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -D_LARGEFILE_SOURCE -D_LARGE_FILES")
 
@@ -83,7 +83,7 @@ IF ("${CMAKE_C_PLATFORM_ID}" STREQUAL "QNX")
 ENDIF()
 
 IF(NOT LIBTYPE)
-    SET(LIBTYPE SHARED)
+    SET(LIBTYPE STATIC)
 ENDIF()
 
 SET(LIB_MAJOR_VERSION "1")
