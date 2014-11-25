@@ -60,10 +60,11 @@ set_target_properties(tinyxml2 PROPERTIES
 	VERSION "${GENERIC_LIB_VERSION}"
 	SOVERSION "${GENERIC_LIB_SOVERSION}")
 
-add_executable(test xmltest.cpp)
-add_dependencies(test tinyxml2)
-add_dependencies(test ${TARGET_DATA_COPY})
-target_link_libraries(test tinyxml2)
+# Don't need the test executable
+#add_executable(test xmltest.cpp)
+#add_dependencies(test tinyxml2)
+#add_dependencies(test ${TARGET_DATA_COPY})
+#target_link_libraries(test tinyxml2)
 
 
 if(BUILD_STATIC_LIBS)

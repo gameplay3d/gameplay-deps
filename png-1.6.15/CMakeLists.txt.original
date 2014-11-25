@@ -42,7 +42,7 @@ endif()
 if(DEFINED PNG_SHARED)
   option(PNG_SHARED "Build shared lib" ${PNG_SHARED})
 else()
-  option(PNG_SHARED "Build shared lib" OFF)
+  option(PNG_SHARED "Build shared lib" ON)
 endif()
 if(DEFINED PNG_STATIC)
   option(PNG_STATIC "Build static lib" ${PNG_STATIC})
@@ -50,7 +50,7 @@ else()
   option(PNG_STATIC "Build static lib" ON)
 endif()
 
-option(PNG_TESTS  "Build libpng tests" OFF)
+option(PNG_TESTS  "Build libpng tests" YES)
 
 # Many more configuration options could be added here
 option(PNG_DEBUG         "Build with debug output" NO)
