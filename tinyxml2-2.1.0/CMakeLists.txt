@@ -54,11 +54,13 @@ if(BUILD_STATIC_LIBS)
 	add_library(tinyxml2static STATIC tinyxml2.cpp tinyxml2.h)
 	set_target_properties(tinyxml2static PROPERTIES OUTPUT_NAME tinyxml2)
 endif(BUILD_STATIC_LIBS)
-add_library(tinyxml2 SHARED tinyxml2.cpp tinyxml2.h)
-set_target_properties(tinyxml2 PROPERTIES
-        COMPILE_DEFINITIONS "TINYXML2_EXPORT"
-	VERSION "${GENERIC_LIB_VERSION}"
-	SOVERSION "${GENERIC_LIB_SOVERSION}")
+
+# Don't build the dso
+#add_library(tinyxml2 SHARED tinyxml2.cpp tinyxml2.h)
+#set_target_properties(tinyxml2 PROPERTIES
+#        COMPILE_DEFINITIONS "TINYXML2_EXPORT"
+#	VERSION "${GENERIC_LIB_VERSION}"
+#	SOVERSION "${GENERIC_LIB_SOVERSION}")
 
 # Don't need the test executable
 #add_executable(test xmltest.cpp)
@@ -68,7 +70,7 @@ set_target_properties(tinyxml2 PROPERTIES
 
 
 if(BUILD_STATIC_LIBS)
-	install(TARGETS tinyxml2 tinyxml2static
+	install(TARGETS tinyxml2static
 		RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 		ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
@@ -87,6 +89,6 @@ foreach(p LIB INCLUDE)
 endforeach()
 
 configure_file(tinyxml2.pc.in tinyxml2.pc @ONLY)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/tinyxml2.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+# install(FILES ${CMAKE_CURRENT_BINARY_DIR}/tinyxml2.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
 
 #add_test(test ${SAMPLE_NAME} COMMAND $<TARGET_FILE:${SAMPLE_NAME}>)

@@ -21,8 +21,12 @@ set(PNGLIB_NAME libpng${PNGLIB_MAJOR}${PNGLIB_MINOR})
 set(PNGLIB_VERSION ${PNGLIB_MAJOR}.${PNGLIB_MINOR}.${PNGLIB_RELEASE})
 
 # needed packages
-find_package(ZLIB REQUIRED)
-include_directories(${ZLIB_INCLUDE_DIR})
+#find_package(ZLIB REQUIRED)
+#include_directories(${ZLIB_INCLUDE_DIR})
+include_directories("${PROJECT_BINARY_DIR}/../zlib-1.2.8")
+set(SKIP_INSTALL_FILES 1)
+set(SKIP_INSTALL_EXECUTABLES 1)
+set(SKIP_INSTALL_EXPORT 1)
 
 if(NOT WIN32)
   find_library(M_LIBRARY
@@ -227,9 +231,9 @@ macro(CREATE_SYMLINK SRC_FILE DEST_FILE)
 endmacro()
 
 # libpng is a library so default to 'lib'
-if(NOT DEFINED CMAKE_INSTALL_LIBDIR)
-  set(CMAKE_INSTALL_LIBDIR lib)
-endif(NOT DEFINED CMAKE_INSTALL_LIBDIR)
+#if(NOT DEFINED CMAKE_INSTALL_LIBDIR)
+set(CMAKE_INSTALL_LIBDIR lib)
+#endif(NOT DEFINED CMAKE_INSTALL_LIBDIR)
 
 # CREATE PKGCONFIG FILES
 # we use the same files like ./configure, so we have to set its vars
