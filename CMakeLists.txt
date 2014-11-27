@@ -22,3 +22,5 @@ add_subdirectory(png-1.6.15)
 # Ogg needs to be built before vorbis
 add_subdirectory(ogg-1.3.2)
 add_subdirectory(vorbis-1.3.4)
+
+add_subdirectory(bullet-2.82-r2704)
