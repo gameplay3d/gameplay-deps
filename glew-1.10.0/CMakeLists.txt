@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
 
-add_library(glew src/glew.c)
+add_library(GLEW src/glew.c)
 include_directories(include)
 add_definitions(-DGLEW_NO_GLU)
 
-install(TARGETS glew DESTINATION lib)
+install(TARGETS GLEW DESTINATION lib)
 install(FILES include/GL/glew.h DESTINATION include/GL)
+install(FILES include/GL/glxew.h DESTINATION include/GL)
