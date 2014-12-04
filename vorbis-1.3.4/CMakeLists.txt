@@ -40,5 +40,4 @@ include_directories("${PROJECT_SOURCE_DIR}/ogg-1.3.2/include")
 # For ogg configured headers
 include_directories("${PROJECT_BINARY_DIR}/ogg-1.3.2/include")
 
-install(TARGETS vorbis vorbisfile vorbisenc DESTINATION lib)
 install(FILES ${VORBIS_PUBLIC_HEADERS} DESTINATION include/vorbis)

@@ -7,15 +7,21 @@ include(${PROJECT_SOURCE_DIR}/cmake/TargetArch.cmake)
 set(ARCH "unknown")
 target_architecture(ARCH)
 
-set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR}/out/external-deps/targets/${CMAKE_SYSTEM_NAME}/${ARCH})
+set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/out/external-deps")
+
+if(NOT ANDROID)
+    # Android toolchain will set its own output path
+    set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/out/external-deps/targets/${CMAKE_SYSTEM_NAME}/${ARCH}")
+endif(NOT ANDROID)
+
 
 add_subdirectory(sqlite-3.8.7)
 add_subdirectory(Box2D-2.3.0)
 add_subdirectory(tinyxml2-2.1.0)
-add_subdirectory(glew-1.10.0)
 add_subdirectory(lua-5.2.3)
 
 if (NOT APPLE)
+    add_subdirectory(glew-1.10.0)
     add_subdirectory(openal-1.16.0)
 endif(NOT APPLE)
 

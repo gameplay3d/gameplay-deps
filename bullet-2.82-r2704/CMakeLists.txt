@@ -386,10 +386,10 @@ ENDIF(BUILD_EXTRAS)
 SUBDIRS(src)
 
 IF("${CMAKE_GENERATOR}" MATCHES "Unix Makefiles")
-	OPTION(INSTALL_LIBS "Set when you want to install libraries" ON)
+	OPTION(INSTALL_LIBS "Set when you want to install libraries" OFF)
 ELSE()
 	IF(APPLE AND FRAMEWORK)
-		OPTION(INSTALL_LIBS "Set when you want to install libraries" ON)
+		OPTION(INSTALL_LIBS "Set when you want to install libraries" OFF)
 	ELSE()
 #by default, don't enable the 'INSTALL' option for Xcode and MSVC projectfiles
 		OPTION(INSTALL_LIBS "Set when you want to install libraries" OFF)

@@ -20,6 +20,5 @@ include_directories("${PROJECT_BINARY_DIR}/ogg-1.3.2/include")
 include_directories(include)
 add_library(ogg ${OGG_SRC})
 
-install(TARGETS ogg DESTINATION lib)
 install(FILES ${OGG_PUBLIC_HEADERS} DESTINATION include/ogg)
 install(FILES "${PROJECT_BINARY_DIR}/ogg-1.3.2/include/ogg/config_types.h" DESTINATION include/ogg)

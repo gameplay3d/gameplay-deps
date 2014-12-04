@@ -14,5 +14,4 @@ liolib.c lmathlib.c loslib.c lstrlib.c ltablib.c loadlib.c linit.c)
 
 add_library(lua ${LUA_SRC})
 
-install(TARGETS lua DESTINATION lib)
 install(FILES ${LUA_PUBLIC_HEADERS} DESTINATION include/lua)

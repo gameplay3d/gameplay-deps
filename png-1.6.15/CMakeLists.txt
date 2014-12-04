@@ -17,7 +17,7 @@ enable_testing()
 set(PNGLIB_MAJOR 1)
 set(PNGLIB_MINOR 6)
 set(PNGLIB_RELEASE 15)
-set(PNGLIB_NAME libpng${PNGLIB_MAJOR}${PNGLIB_MINOR})
+set(PNGLIB_NAME libpng)
 set(PNGLIB_VERSION ${PNGLIB_MAJOR}.${PNGLIB_MINOR}.${PNGLIB_RELEASE})
 
 # needed packages
@@ -25,6 +25,7 @@ set(PNGLIB_VERSION ${PNGLIB_MAJOR}.${PNGLIB_MINOR}.${PNGLIB_RELEASE})
 #include_directories(${ZLIB_INCLUDE_DIR})
 include_directories("${PROJECT_BINARY_DIR}/../zlib-1.2.8")
 set(SKIP_INSTALL_FILES 1)
+set(SKIP_INSTALL_LIBRARIES 1)
 set(SKIP_INSTALL_EXECUTABLES 1)
 set(SKIP_INSTALL_EXPORT 1)
 
@@ -61,7 +62,7 @@ option(PNG_DEBUG         "Build with debug output" NO)
 option(PNGARG            "Disable ANSI-C prototypes" NO)
 
 # SET LIBNAME
-set(PNG_LIB_NAME png${PNGLIB_MAJOR}${PNGLIB_MINOR})
+set(PNG_LIB_NAME png)
 
 # to distinguish between debug and release lib
 set(CMAKE_DEBUG_POSTFIX "d")

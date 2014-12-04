@@ -680,7 +680,7 @@ ENDIF()
 OPTION(ALSOFT_REQUIRE_NEON "Require ARM Neon support" OFF)
 CHECK_INCLUDE_FILE(arm_neon.h HAVE_ARM_NEON_H)
 IF(HAVE_ARM_NEON_H)
-    OPTION(ALSOFT_CPUEXT_NEON "Enable ARM Neon support" ON)
+    OPTION(ALSOFT_CPUEXT_NEON "Enable ARM Neon support" OFF)
     IF(ALSOFT_CPUEXT_NEON)
         SET(HAVE_NEON 1)
         SET(ALC_OBJS  ${ALC_OBJS} Alc/mixer_neon.c)
@@ -1094,11 +1094,11 @@ ENDIF()
 TARGET_LINK_LIBRARIES(${LIBNAME} common ${EXTRA_LIBS})
 
 # Add an install target here
-INSTALL(TARGETS ${LIBNAME}
-        RUNTIME DESTINATION bin
-        LIBRARY DESTINATION "lib${LIB_SUFFIX}"
-        ARCHIVE DESTINATION "lib${LIB_SUFFIX}"
-)
+#INSTALL(TARGETS ${LIBNAME}
+#        RUNTIME DESTINATION bin
+#        LIBRARY DESTINATION "lib${LIB_SUFFIX}"
+#        ARCHIVE DESTINATION "lib${LIB_SUFFIX}"
+#)
 INSTALL(FILES include/AL/al.h
               include/AL/alc.h
               include/AL/alext.h
