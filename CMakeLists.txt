@@ -12,6 +12,7 @@ set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/out/external-deps")
 if(NOT ANDROID)
     # Android toolchain will set its own output path
     set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/out/external-deps/targets/${CMAKE_SYSTEM_NAME}/${ARCH}")
+    file(MAKE_DIRECTORY ${LIBRARY_OUTPUT_PATH})
 endif(NOT ANDROID)
 
 
