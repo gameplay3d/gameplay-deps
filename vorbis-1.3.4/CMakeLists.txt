@@ -2,7 +2,11 @@ cmake_minimum_required(VERSION 2.8)
 
 set(VORBIS_PUBLIC_HEADERS include/vorbis/codec.h include/vorbis/vorbisenc.h include/vorbis/vorbisfile.h)
 
-add_definitions(-DHAVE_ALLOCA_H -DUSE_MEMORY_H)
+if(WIN32)
+	add_definitions(-DUSE_MEMORY_H)
+else(WIN32)
+	add_definitions(-DHAVE_ALLOCA_H -DUSE_MEMORY_H)
+endif(WIN32)
 add_definitions(-w)
 
 set(VORBIS_SRC 

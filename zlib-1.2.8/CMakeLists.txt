@@ -202,6 +202,8 @@ if(NOT CYGWIN)
     #set_target_properties(zlib PROPERTIES VERSION ${ZLIB_FULL_VERSION})
 endif()
 
+set_target_properties(zlibstatic PROPERTIES OUTPUT_NAME z)
+
 if(UNIX)
     # On unix-like platforms the library is almost always called libz
    set_target_properties(zlibstatic PROPERTIES OUTPUT_NAME z)

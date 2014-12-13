@@ -24,6 +24,7 @@ set(PNGLIB_VERSION ${PNGLIB_MAJOR}.${PNGLIB_MINOR}.${PNGLIB_RELEASE})
 #find_package(ZLIB REQUIRED)
 #include_directories(${ZLIB_INCLUDE_DIR})
 include_directories("${PROJECT_BINARY_DIR}/../zlib-1.2.8")
+include_directories("${PROJECT_SOURCE_DIR}/../zlib-1.2.8")
 set(SKIP_INSTALL_FILES 1)
 set(SKIP_INSTALL_LIBRARIES 1)
 set(SKIP_INSTALL_EXECUTABLES 1)
@@ -145,7 +146,7 @@ if(PNG_STATIC)
   list(APPEND PNG_LIB_TARGETS ${PNG_LIB_NAME_STATIC})
   if(MSVC)
     # msvc does not append 'lib' - do it here to have consistent name
-    set_target_properties(${PNG_LIB_NAME_STATIC} PROPERTIES PREFIX "lib")
+    #    set_target_properties(${PNG_LIB_NAME_STATIC} PROPERTIES PREFIX "lib")
   endif()
   target_link_libraries(${PNG_LIB_NAME_STATIC} ${ZLIB_LIBRARY} ${M_LIBRARY})
 endif()
@@ -267,11 +268,11 @@ if(PNG_STATIC)
   # MSVC doesn't use a different file extension for shared vs. static
   # libs.  We are able to change OUTPUT_NAME to remove the _static
   # for all other platforms.
-  if(NOT MSVC)
+  #  if(NOT MSVC)
     set_target_properties(${PNG_LIB_NAME_STATIC} PROPERTIES
       OUTPUT_NAME ${PNG_LIB_NAME}
       CLEAN_DIRECT_OUTPUT 1)
-  endif()
+  #endif()
 endif()
 
 # If CMake > 2.4.x, we set a variable used below to export

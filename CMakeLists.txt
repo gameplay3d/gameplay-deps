@@ -17,8 +17,13 @@ if(NOT ANDROID AND NOT IOS)
     set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/out/external-deps/targets/${CMAKE_SYSTEM_NAME}/${ARCH}")
 endif(NOT ANDROID AND NOT IOS)
 
+if(WIN32)
+    # Override "Release" directory names
+    SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE "${LIBRARY_OUTPUT_PATH}")
+endif(WIN32)
+
 file(MAKE_DIRECTORY ${LIBRARY_OUTPUT_PATH})
-message(STATUS "Direcotry: ${LIBRARY_OUTPUT_PATH}")
+message(STATUS "Directory: ${LIBRARY_OUTPUT_PATH}")
 
 add_subdirectory(sqlite-3.8.7)
 add_subdirectory(Box2D-2.3.0)

@@ -22,6 +22,8 @@ cross-compiling.
 
 # Compiling (Host and Target are the same)
 
+## Not Windows
+
 For the simple case (not cross-compiling):
 
 ```
@@ -41,6 +43,20 @@ with the following structure:
 When building for multiple targets, only one of those targets requires a "make
 install".  The install step will copy the public headers, which are the same
 regardless of the target.  So it's only needed once.
+
+## Windows
+
+For Windows, we generate Visual Studio project files:
+
+```
+> cd GamePlay-deps
+> mkdir build
+> cd build
+> cmake -G"Visual Studio 12 Win64" ..
+> start ALL_BUILD.vcxproj
+```
+
+Switch the active configuration to "Release".  Then build the solution.
 
 # Cross-Compiling (Host and Target are different)
 
