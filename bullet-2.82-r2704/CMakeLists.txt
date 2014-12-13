@@ -40,7 +40,8 @@ ENDIF(USE_CUSTOM_VECTOR_MATH)
 
 
 IF (APPLE OR MSVC)
-	OPTION(BUILD_MULTITHREADING "Use BulletMultiThreading" ON)
+	# By default, don't build multi-threading.
+	OPTION(BUILD_MULTITHREADING "Use BulletMultiThreading" OFF)
 ELSE()
 	OPTION(BUILD_MULTITHREADING "Use BulletMultiThreading" OFF)
 ENDIF()
@@ -52,7 +53,7 @@ IF (BUILD_MULTITHREADING)
 	ENDIF(USE_MULTITHREADED_BENCHMARK)
 
 	IF (MSVC OR APPLE)
-		OPTION(BUILD_MINICL_OPENCL_DEMOS "Build OpenCL demos for MiniCL (Generic CPU)"  ON)
+		OPTION(BUILD_MINICL_OPENCL_DEMOS "Build OpenCL demos for MiniCL (Generic CPU)"  OFF)
 	ELSE()
 		OPTION(BUILD_MINICL_OPENCL_DEMOS "Build OpenCL demos for MiniCL (Generic CPU)" OFF)
 	ENDIF(MSVC OR APPLE)
@@ -386,13 +387,13 @@ ENDIF(BUILD_EXTRAS)
 SUBDIRS(src)
 
 IF("${CMAKE_GENERATOR}" MATCHES "Unix Makefiles")
-	OPTION(INSTALL_LIBS "Set when you want to install libraries" OFF)
+	OPTION(INSTALL_LIBS "Set when you want to install libraries" ON)
 ELSE()
 	IF(APPLE AND FRAMEWORK)
 		OPTION(INSTALL_LIBS "Set when you want to install libraries" OFF)
 	ELSE()
 #by default, don't enable the 'INSTALL' option for Xcode and MSVC projectfiles
-		OPTION(INSTALL_LIBS "Set when you want to install libraries" OFF)
+		OPTION(INSTALL_LIBS "Set when you want to install libraries" ON)
 	ENDIF()
 ENDIF()
 
