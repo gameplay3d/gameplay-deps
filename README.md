@@ -7,17 +7,17 @@ We are using CMake to create a single, consistent way of compiling all the
 libraries that GamePlay uses.  CMake with toolchain files are used to support
 cross-compiling.
 
-| Host     | Target Platform             | Target Arch                   |
-|----------|-----------------------------|-------------------------------|
-| MacOSX   | Darwin                      | x86_64                        |
-|          | iOS                         | arm (armv6, armv7 as fat libs)|
-|          |                             | x86 (simulator)               |
-|          | Android                     | armeabi-v7a                   |
-|          |                             | x86 (simulator)               |
-| Linux    | Linux                       | x86_64                        |
-|          | Android                     | armeabi-v7a                   |
-|          |                             | x86 (simulator)               |
-| Windows  | Windows                     | x86_64                        |
+| Host     | Target Platform             | Target Arch                            |
+|----------|-----------------------------|----------------------------------------|
+| MacOSX   | Darwin                      | x86_64                                 |
+|          | iOS                         | arm (armv7, armv7s, arm64 as fat libs) |
+|          |                             | x86 (i386, x86_64 as fat libs)         |
+|          | Android                     | armeabi-v7a                            |
+|          |                             | x86 (simulator)                        | 
+| Linux    | Linux                       | x86_64                                 |
+|          | Android                     | armeabi-v7a                            |
+|          |                             | x86 (simulator)                        |
+| Windows  | Windows                     | x86_64                                 |
 
 
 # Compiling (Host and Target are the same)
@@ -93,24 +93,23 @@ you want to build.  To do that:
 ```
 $ cd android-ndk-r10c
 $ ./build/tools/make-standalone-toolchain.sh --platform=android-16 --arch=armeabi-v7a --install-dir=/path/to/android-arm
-$ ./build/tools/make-standalone-toolchain.sh --platform=android-16 --arch=x86_64 --install-dir=/path/to/android-x86_64
+$ ./build/tools/make-standalone-toolchain.sh --platform=android-16 --arch=x86 --install-dir=/path/to/android-x86
 ```
 
 This will install the standalone toolchain directories in /path/to/android-arm
-for armeabi-v7a and /path/to/android-x86_64 for x86_64 (usually for the
-simulator).
+for armeabi-v7a and /path/to/android-x86 for x86 (usually for the simulator).
 
 ## Android Compiling
 
 With the standalone toolchain directories in place, we can run cmake using the
-android.toolchain.cmake.  For this toolchain file we set the ANDROID_NDK
-environment variable to the appropriate standalone toolchain directory.  We do
-this prior to running cmake.
+android.toolchain.cmake.  For this toolchain file we set the
+ANDROID_STANDALONE_TOOLCHAIN environment variable to the appropriate standalone
+toolchain directory.  We do this prior to running cmake.
 
 ```
 $ cd GamePlay-deps
 $ mkdir build
-$ export ANDROID_NDK=/path/to/android-arm
+$ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-arm
 $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain.cmake ..
 $ make
 ```
@@ -118,4 +117,4 @@ $ make
 For building the simulator version (or any other arch) just change the
 environment variable:
 
-` $ export ANDROID_NDK=/path/to/android-x86_64 `
+` $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-x86 `

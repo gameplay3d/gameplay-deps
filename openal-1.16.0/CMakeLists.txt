@@ -1027,7 +1027,7 @@ CONFIGURE_FILE(
     @ONLY)
 
 # Build a common library with reusable helpers
-ADD_LIBRARY(common STATIC ${COMMON_OBJS})
+#ADD_LIBRARY(common STATIC ${COMMON_OBJS})
 
 # Build main library
 ADD_LIBRARY(${LIBNAME} ${LIBTYPE} ${COMMON_OBJS} ${OPENAL_OBJS} ${ALC_OBJS})
