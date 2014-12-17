@@ -37,9 +37,10 @@ if (NOT APPLE)
     add_subdirectory(openal-1.16.0)
 endif(NOT APPLE)
 
-# zlib must be built before png
+# zlib must be built before png and curl
 add_subdirectory(zlib-1.2.8)
 add_subdirectory(png-1.6.15)
+add_subdirectory(curl-7.39.0)
 
 # Ogg needs to be built before vorbis
 add_subdirectory(ogg-1.3.2)

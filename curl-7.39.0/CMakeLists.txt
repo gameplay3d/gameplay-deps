@@ -71,9 +71,9 @@ set(OS "\"${CMAKE_SYSTEM_NAME}\"")
 include_directories(${PROJECT_BINARY_DIR}/include/curl)
 include_directories( ${CURL_SOURCE_DIR}/include )
 
-option(BUILD_CURL_EXE "Set to ON to build cURL executable." ON)
-option(BUILD_CURL_TESTS "Set to ON to build cURL tests." ON)
-option(CURL_STATICLIB "Set to ON to build libcurl with static linking." OFF)
+option(BUILD_CURL_EXE "Set to ON to build cURL executable." OFF)
+option(BUILD_CURL_TESTS "Set to ON to build cURL tests." OFF)
+option(CURL_STATICLIB "Set to ON to build libcurl with static linking." ON)
 option(CURL_USE_ARES "Set to ON to enable c-ares support" OFF)
 # initialize CURL_LIBS
 set(CURL_LIBS "")
@@ -104,7 +104,7 @@ mark_as_advanced(CURL_HIDDEN_SYMBOLS)
 # MARK_AS_ADVANCED(CURL_WINDOWS_SSPI)
 # ENDIF()
 
-option(HTTP_ONLY "disables all protocols except HTTP (This overrides all CURL_DISABLE_* options)" OFF)
+option(HTTP_ONLY "disables all protocols except HTTP (This overrides all CURL_DISABLE_* options)" ON)
 mark_as_advanced(HTTP_ONLY)
 option(CURL_DISABLE_FTP "disables FTP" OFF)
 mark_as_advanced(CURL_DISABLE_FTP)
@@ -177,7 +177,7 @@ if(ENABLE_IPV6)
   endif()
 endif()
 
-option(ENABLE_MANUAL "to provide the built-in manual" ON)
+option(ENABLE_MANUAL "to provide the built-in manual" OFF)
 unset(USE_MANUAL CACHE) # TODO: cache NROFF/NROFF_MANOPT/USE_MANUAL vars?
 if(ENABLE_MANUAL)
   find_program(NROFF NAMES gnroff nroff)
@@ -257,7 +257,7 @@ if(WIN32)
   check_library_exists_concat("winmm"  getch        HAVE_LIBWINMM)
 endif()
 
-option(CMAKE_USE_OPENSSL "Use OpenSSL code. Experimental" ON)
+option(CMAKE_USE_OPENSSL "Use OpenSSL code. Experimental" OFF)
 mark_as_advanced(CMAKE_USE_OPENSSL)
 
 set(USE_SSLEAY OFF)
@@ -416,7 +416,7 @@ if(CURL_ZLIB)
 endif()
 
 #libSSH2
-option(CMAKE_USE_LIBSSH2 "Use libSSH2" ON)
+option(CMAKE_USE_LIBSSH2 "Use libSSH2" OFF)
 mark_as_advanced(CMAKE_USE_LIBSSH2)
 set(USE_LIBSSH2 OFF)
 set(HAVE_LIBSSH2 OFF)
@@ -810,12 +810,18 @@ endforeach(CURL_TEST)
 if(HAVE_FILE_OFFSET_BITS)
   set(_FILE_OFFSET_BITS 64)
 endif(HAVE_FILE_OFFSET_BITS)
-foreach(CURL_TEST
-    HAVE_GLIBC_STRERROR_R
-    HAVE_POSIX_STRERROR_R
-    )
-  curl_internal_test_run(${CURL_TEST})
-endforeach(CURL_TEST)
+
+
+IF(CMAKE_CROSSCOMPILING)
+    SET(HAVE_POSIX_STRERROR_R 1)
+ELSE(CMAKE_CROSSCOMPILING)
+    foreach(CURL_TEST
+        HAVE_GLIBC_STRERROR_R
+        HAVE_POSIX_STRERROR_R
+        )
+      curl_internal_test_run(${CURL_TEST})
+    endforeach(CURL_TEST)
+ENDIF(CMAKE_CROSSCOMPILING)
 
 # Check for reentrant
 foreach(CURL_TEST
@@ -1095,18 +1101,18 @@ set(VERSIONNUM              "${CURL_VERSION_NUM}")
 # Finally generate a "curl-config" matching this config
 configure_file("${CURL_SOURCE_DIR}/curl-config.in"
                "${CURL_BINARY_DIR}/curl-config" @ONLY)
-install(FILES "${CMAKE_BINARY_DIR}/curl-config"
-        DESTINATION bin
-        PERMISSIONS
-          OWNER_READ OWNER_WRITE OWNER_EXECUTE
-          GROUP_READ GROUP_EXECUTE
-          WORLD_READ WORLD_EXECUTE)
+#install(FILES "${CMAKE_BINARY_DIR}/curl-config"
+#        DESTINATION bin
+#        PERMISSIONS
+#          OWNER_READ OWNER_WRITE OWNER_EXECUTE
+#          GROUP_READ GROUP_EXECUTE
+#          WORLD_READ WORLD_EXECUTE)
 
 # Finally generate a pkg-config file matching this config
 configure_file("${CURL_SOURCE_DIR}/libcurl.pc.in"
                "${CURL_BINARY_DIR}/libcurl.pc" @ONLY)
-install(FILES "${CMAKE_BINARY_DIR}/libcurl.pc"
-        DESTINATION lib/pkgconfig)
+#install(FILES "${CMAKE_BINARY_DIR}/libcurl.pc"
+#        DESTINATION lib/pkgconfig)
 
 # This needs to be run very last so other parts of the scripts can take advantage of this.
 if(NOT CURL_CONFIG_HAS_BEEN_RUN_BEFORE)
