@@ -46,17 +46,19 @@ regardless of the target.  So it's only needed once.
 
 ## Windows
 
-For Windows, we generate Visual Studio project files:
+For Windows, we generate Visual Studio project files.  It should be done from
+within a Visual Studio command prompt.  You should also have the DirectX SDK
+installed because OpenAL should use the DirectSound back-end.  We also build
+both the Debug and Release variants.
 
 ```
 > cd GamePlay-deps
 > mkdir build
 > cd build
 > cmake -G"Visual Studio 12 Win64" ..
-> start ALL_BUILD.vcxproj
+> msbuild GamePlay-deps.sln /property:Configuration=Debug
+> msbuild GamePlay-deps.sln /property:Configuration=Release
 ```
-
-Switch the active configuration to "Release".  Then build the solution.
 
 # Cross-Compiling (Host and Target are different)
 
