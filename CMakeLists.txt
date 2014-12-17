@@ -17,7 +17,11 @@ if(NOT ANDROID AND NOT IOS)
     set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/out/external-deps/targets/${CMAKE_SYSTEM_NAME}/${ARCH}")
 endif(NOT ANDROID AND NOT IOS)
 
-SET(CMAKE_BUILD_TYPE "Release")
+IF(NOT WIN32)
+    # For Windows, let the user pick since we need to generate both Debug and
+    # Release variants of all the libs.
+    SET(CMAKE_BUILD_TYPE "Release")
+ENDIF(NOT WIN32)
 
 file(MAKE_DIRECTORY ${LIBRARY_OUTPUT_PATH})
 message(STATUS "Directory: ${LIBRARY_OUTPUT_PATH}")
