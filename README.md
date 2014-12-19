@@ -38,7 +38,7 @@ This will build all the libraries and place them into a new "out" directory
 with the following structure:
 
 * All public headers are copied to out/external-deps/include
-* Libraries are built in out/external-deps/targets/<target platform>/<target arch>
+* Libraries are built in out/external-deps/targets/\<target platform\>/\<target arch\>
 
 When building for multiple targets, only one of those targets requires a "make
 install".  The install step will copy the public headers, which are the same
@@ -120,3 +120,11 @@ For building the simulator version (or any other arch) just change the
 environment variable:
 
 ` $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-x86 `
+
+# Building Extra Libs
+
+There's a set of additional libs that can be built by providing `cmake -DBUILD_EXTRA_LIBS=1 ..`
+The extra libraries are for roadmap items, and so these libs aren't needed for existing
+functionality.
+
+

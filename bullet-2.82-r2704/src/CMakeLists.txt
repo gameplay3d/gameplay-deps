@@ -1,4 +1,5 @@
-SUBDIRS(  BulletSoftBody BulletCollision BulletDynamics LinearMath )
+SUBDIRS(  BulletCollision BulletDynamics LinearMath )
+# We don't build BulletSoftBody
 
 IF(BUILD_MULTITHREADING)
 	SUBDIRS(MiniCL BulletMultiThreaded)

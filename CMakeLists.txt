@@ -26,8 +26,11 @@ ENDIF(NOT WIN32)
 file(MAKE_DIRECTORY ${LIBRARY_OUTPUT_PATH})
 message(STATUS "Directory: ${LIBRARY_OUTPUT_PATH}")
 
-add_subdirectory(sqlite-3.8.7)
-add_subdirectory(Box2D-2.3.0)
+IF(BUILD_EXTRA_LIBS)
+    add_subdirectory(sqlite-3.8.7)
+    add_subdirectory(Box2D-2.3.0)
+ENDIF(BUILD_EXTRA_LIBS)
+
 add_subdirectory(tinyxml2-2.1.0)
 add_subdirectory(lua-5.2.3)
 
@@ -41,9 +44,9 @@ endif(NOT APPLE)
 add_subdirectory(zlib-1.2.8)
 add_subdirectory(png-1.6.15)
 
-if(NOT WIN32)
+if(NOT WIN32 AND BUILD_EXTRA_LIBS)
     add_subdirectory(curl-7.39.0)
-endif(NOT WIN32)
+endif(NOT WIN32 AND BUILD_EXTRA_LIBS)
 
 # Ogg needs to be built before vorbis
 add_subdirectory(ogg-1.3.2)
