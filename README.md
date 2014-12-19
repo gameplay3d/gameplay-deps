@@ -22,7 +22,7 @@ cross-compiling.
 
 # Compiling (Host and Target are the same)
 
-## Not Windows
+## Linux and Mac
 
 For the simple case (not cross-compiling):
 
