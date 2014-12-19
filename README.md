@@ -121,10 +121,31 @@ environment variable:
 
 ` $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-x86 `
 
+# Creating a Single Lib
+
+To prevent having everyone constantly update their linker flags, everything
+gets amalgamated into a single static lib.  One for each platform/arch
+combination.
+
+For Unix-based toolchains, you need to provide a path to "ar", and the target
+directory containing all the .a files:
+
+```
+$ cd GamePlay-deps
+$ ./cmake/amalgamate.sh /usr/bin/ar ./out/external-deps/targets/Linux/x86_64
+```
+
+The result will be a libgameplay-deps.a file created in the target directory
+and all .a files removed.
+
+The path to "ar" is necessary to support cross-compiling toolchains.  You will
+want to use the appropriate "ar" for the target you want to amalgamate.
+
+Windows has its own amalgamate.bat which uses LIB.EXE.  It is Windows only, and
+can't be used for any other targets.
+
 # Building Extra Libs
 
-There's a set of additional libs that can be built by providing `cmake -DBUILD_EXTRA_LIBS=1 ..`
-The extra libraries are for roadmap items, and so these libs aren't needed for existing
-functionality.
-
-
+There's a set of additional libs that can be built by providing `cmake
+-DBUILD_EXTRA_LIBS=1 ..` The extra libraries are for roadmap items, and so
+these libs aren't needed for existing functionality.
