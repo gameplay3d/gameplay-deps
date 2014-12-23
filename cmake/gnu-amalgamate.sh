@@ -2,7 +2,7 @@
 
 if [ $# -ne 2 ];
 then
-    echo "Usage: amalgamate.sh <ar command> <target directory>"
+    echo "Usage: gnu-amalgamate.sh <ar command> <target directory>"
     exit 1
 fi
 
