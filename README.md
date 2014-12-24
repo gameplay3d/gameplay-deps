@@ -127,12 +127,12 @@ To prevent having everyone constantly update their linker flags, everything
 gets amalgamated into a single static lib.  One for each platform/arch
 combination.
 
-For Unix-based toolchains, you need to provide a path to "ar", and the target
+For GNU-based toolchains, you need to provide a path to "ar", and the target
 directory containing all the .a files:
 
 ```
 $ cd GamePlay-deps
-$ ./cmake/amalgamate.sh /usr/bin/ar ./out/external-deps/targets/Linux/x86_64
+$ ./cmake/gnu-amalgamate.sh /usr/bin/ar ./out/external-deps/targets/Linux/x86_64
 ```
 
 The result will be a libgameplay-deps.a file created in the target directory
@@ -141,8 +141,20 @@ and all .a files removed.
 The path to "ar" is necessary to support cross-compiling toolchains.  You will
 want to use the appropriate "ar" for the target you want to amalgamate.
 
-Windows has its own amalgamate.bat which uses LIB.EXE.  It is Windows only, and
-can't be used for any other targets.
+On Mac, use mac-amalgamate.sh along with a target directory:
+
+```
+$ cd GamePlay-deps
+$ ./cmake/mac-amalgamate.sh ./out/external-deps/targets/Darwin/x86_64
+```
+
+The mac-amalgamate.sh is good for Darwin as well as iOS cross-compiling.  The
+Mac version makes use of libtool.  It also works fine for amalgamating fat
+libraries.
+
+Windows also has its own msvc-amalgamate.bat which uses LIB.EXE.  It is Windows
+only, and can't be used for any other targets.  Should be executed from the
+GamePlay-deps root directory after both Release and Debug builds.
 
 # Building Extra Libs
 
