@@ -724,7 +724,7 @@ if(NOT _CMAKE_IN_TRY_COMPILE)
  else()
   set( EXECUTABLE_OUTPUT_PATH "${LIBRARY_OUTPUT_PATH_ROOT}/bin" CACHE PATH "Output directory for applications" )
  endif()
- set( LIBRARY_OUTPUT_PATH "${LIBRARY_OUTPUT_PATH_ROOT}/out/external-deps/targets/Android/${ANDROID_NDK_ABI_NAME}" CACHE PATH "path for android libs" )
+ set( LIBRARY_OUTPUT_PATH "${LIBRARY_OUTPUT_PATH_ROOT}/out/external-deps/libs/Android/${ANDROID_NDK_ABI_NAME}" CACHE PATH "path for android libs" )
 endif()
 
 # includes
