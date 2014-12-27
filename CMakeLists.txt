@@ -57,3 +57,57 @@ add_subdirectory(ogg-1.3.2)
 add_subdirectory(vorbis-1.3.4)
 
 add_subdirectory(bullet-2.82-r2704)
+
+set(BUILD_TARGETS
+    BulletDynamics
+    LinearMath
+    BulletCollision
+    vorbisfile
+    vorbisenc
+    vorbis
+    ogg
+    png_static
+    zlibstatic
+    lua
+    tinyxml2static
+)
+
+if (NOT APPLE)
+    list(APPEND BUILD_TARGETS GLEW openal)
+endif(NOT APPLE)
+
+IF(BUILD_EXTRA_LIBS)
+    list(APPEND BUILD_TARGETS sqlite Box2D)
+    if(NOT WIN32)
+        list(APPEND BUILD_TARGETS libcurl)
+    endif(NOT WIN32)
+ENDIF(BUILD_EXTRA_LIBS)
+
+if(WIN32)
+    set(GAMEPLAY_DEPS gameplay-deps.lib)
+else(WIN32)
+    set(GAMEPLAY_DEPS libgameplay-deps.a)
+endif(WIN32)
+
+if(LINUX OR ANDROID)
+    add_custom_command(
+        OUTPUT ${GAMEPLAY_DEPS}
+        COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/cmake/gnu-amalgamate.sh ${CMAKE_AR} ${LIBRARY_OUTPUT_PATH}
+    )
+elseif(APPLE)
+    add_custom_command(
+        OUTPUT ${GAMEPLAY_DEPS}
+        COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/cmake/xcode-amalgamate.sh ${LIBRARY_OUTPUT_PATH}
+    )
+else(LINUX OR ANDROID)
+    # Windows
+    add_custom_command(
+        OUTPUT ${GAMEPLAY_DEPS}
+        COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/cmake/msvc-amalgamate.bat ${LIBRARY_OUTPUT_PATH}
+    )
+endif(LINUX OR ANDROID)
+
+add_custom_target(gameplay-deps DEPENDS ${GAMEPLAY_DEPS})
+add_dependencies(gameplay-deps ${BUILD_TARGETS})
+
+SET_DIRECTORY_PROPERTIES(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${LIBRARY_OUTPUT_PATH}/${GAMEPLAY_DEPS})
