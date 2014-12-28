@@ -73,7 +73,12 @@ set(BUILD_TARGETS
 )
 
 if (NOT APPLE)
-    list(APPEND BUILD_TARGETS GLEW openal)
+    list(APPEND BUILD_TARGETS GLEW)
+    IF(WIN32)
+        list(APPEND BUILD_TARGETS OpenAL32)
+    ELSE(WIN32)
+        list(APPEND BUILD_TARGETS openal)
+    ENDIF(WIN32)
 endif(NOT APPLE)
 
 IF(BUILD_EXTRA_LIBS)
@@ -103,7 +108,7 @@ else(LINUX OR ANDROID)
     # Windows
     add_custom_command(
         OUTPUT ${GAMEPLAY_DEPS}
-        COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/cmake/msvc-amalgamate.bat ${LIBRARY_OUTPUT_PATH}
+	COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/cmake/msvc-amalgamate.bat ${LIBRARY_OUTPUT_PATH}/${CMAKE_CFG_INTDIR}
     )
 endif(LINUX OR ANDROID)
 
