@@ -1,0 +1,3 @@
+# Completely disable crlf normalization
+* -text
+* -crlf
