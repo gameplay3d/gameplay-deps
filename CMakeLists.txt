@@ -107,7 +107,7 @@ else(LINUX OR ANDROID)
     )
 endif(LINUX OR ANDROID)
 
-add_custom_target(gameplay-deps DEPENDS ${GAMEPLAY_DEPS})
+add_custom_target(gameplay-deps ALL DEPENDS ${GAMEPLAY_DEPS})
 add_dependencies(gameplay-deps ${BUILD_TARGETS})
 
 SET_DIRECTORY_PROPERTIES(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${LIBRARY_OUTPUT_PATH}/${GAMEPLAY_DEPS})
