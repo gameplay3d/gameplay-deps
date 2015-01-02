@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 2.8)
 
 project(GamePlay-deps)
 
+IF(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    SET(LINUX 1)
+ENDIF(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+
 if(NOT ANDROID AND NOT IOS)
     # Skip any introspection for cross-compiling targets
     include(${PROJECT_SOURCE_DIR}/cmake/TargetArch.cmake)
@@ -104,7 +108,7 @@ elseif(APPLE)
         OUTPUT ${GAMEPLAY_DEPS}
         COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/cmake/xcode-amalgamate.sh ${LIBRARY_OUTPUT_PATH}
     )
-else(LINUX OR ANDROID)
+else()
     # Windows
     add_custom_command(
         OUTPUT ${GAMEPLAY_DEPS}
