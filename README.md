@@ -9,7 +9,7 @@ cross-compiling.
 
 | Host     | Target Platform             | Target Arch                            |
 |----------|-----------------------------|----------------------------------------|
-| MacOSX   | Darwin                      | x86_64                                 |
+| MacOSX   | MacOSX                      | x86_64                                 |
 |          | iOS                         | arm (armv7, armv7s, arm64 as fat libs) |
 |          |                             | x86 (i386, x86_64 as fat libs)         |
 |          | Android                     | armeabi-v7a                            |
@@ -67,7 +67,7 @@ of either cmake/ios.toolchain.cmake or cmake/android.toolchain.cmake
 
 ## iOS Setup
 
-Install XCode 5.1
+Install XCode 6.1
 
 ## iOS Compiling
 
