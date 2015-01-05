@@ -7,22 +7,22 @@ We are using CMake to create a single, consistent way of compiling all the
 libraries that GamePlay uses.  CMake with toolchain files are used to support
 cross-compiling.
 
-| Host     | Target Platform             | Target Arch                            |
-|----------|-----------------------------|----------------------------------------|
-| MacOSX   | MacOSX                      | x86_64                                 |
-|          | iOS                         | arm (armv7, armv7s, arm64 as fat libs) |
-|          |                             | x86 (i386, x86_64 as fat libs)         |
-|          | Android                     | armeabi-v7a                            |
-|          |                             | x86 (simulator)                        | 
-| Linux    | Linux                       | x86_64                                 |
-|          | Android                     | armeabi-v7a                            |
-|          |                             | x86 (simulator)                        |
-| Windows  | Windows                     | x86_64                                 |
+| Host     | Target Platform             | Target Arch                            
+|----------|-----------------------------|----------------------------------------
+| MacOSX   | MacOSX                      | x86_64                                 
+|          | iOS                         | arm (armv7, armv7s, arm64 combined) 
+|          |                             | x86 (i386, x86_64 combined)
+|          | Android                     | armeabi-v7a
+|          |                             | x86
+| Linux    | Linux                       | x86_64
+|          | Android                     | armeabi-v7a
+|          |                             | x86
+| Windows  | Windows                     | x86_64
 
 
 # Compiling (Host and Target are the same)
 
-## Linux and Mac
+## Linux and MacOSX
 
 For the simple case (not cross-compiling):
 
@@ -98,8 +98,8 @@ $ ./build/tools/make-standalone-toolchain.sh --platform=android-16 --arch=armeab
 $ ./build/tools/make-standalone-toolchain.sh --platform=android-16 --arch=x86 --install-dir=/path/to/android-x86
 ```
 
-This will install the standalone toolchain directories in /path/to/android-arm
-for armeabi-v7a and /path/to/android-x86 for x86 (usually for the simulator).
+This will install the standalone toolchain directories in 
+/path/to/android-arm (for armeabi-v7a) and /path/to/android-x86 (for x86, usually simulator).
 
 ## Android Compiling
 
