@@ -19,9 +19,10 @@ set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/out/external-deps")
 if(NOT ANDROID AND NOT IOS)
     # Android and iOS toolchains will set their own output path
     IF(APPLE)
-        set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/out/external-deps/libs/MacOS/${ARCH}")
-    ELSE(APPLE)
-        set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/out/external-deps/libs/${CMAKE_SYSTEM_NAME}/${ARCH}")
+        set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/out/external-deps/libs/macosx/${ARCH}")
+    ELSE()
+        string(TOLOWER ${CMAKE_SYSTEM_NAME} LOWER_SYSTEM_NAME)
+        set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/out/external-deps/libs/${LOWER_SYSTEM_NAME}/${ARCH}")
     ENDIF(APPLE)
 endif(NOT ANDROID AND NOT IOS)
 
@@ -36,8 +37,9 @@ message(STATUS "Directory: ${LIBRARY_OUTPUT_PATH}")
 
 IF(BUILD_EXTRA_LIBS)
     add_subdirectory(sqlite-3.8.7)
-    add_subdirectory(Box2D-2.3.0)
 ENDIF(BUILD_EXTRA_LIBS)
+
+add_subdirectory(Box2D-2.3.0)
 
 add_subdirectory(tinyxml2-2.1.0)
 add_subdirectory(lua-5.2.3)
@@ -63,6 +65,7 @@ add_subdirectory(vorbis-1.3.4)
 add_subdirectory(bullet-2.82-r2704)
 
 set(BUILD_TARGETS
+    Box2D
     BulletDynamics
     LinearMath
     BulletCollision
@@ -86,7 +89,6 @@ if (NOT APPLE)
 endif(NOT APPLE)
 
 IF(BUILD_EXTRA_LIBS)
-    list(APPEND BUILD_TARGETS sqlite Box2D)
     if(NOT WIN32)
         list(APPEND BUILD_TARGETS libcurl)
     endif(NOT WIN32)

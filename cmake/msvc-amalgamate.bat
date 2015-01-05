@@ -5,6 +5,7 @@ echo "Amalgamating target dir: %LIBDIR%"
 
 cd %LIBDIR%
 mkdir tmp
+del gameplay-deps.lib
 move *.lib tmp
 
 LIB.EXE /OUT:gameplay-deps.lib tmp\*

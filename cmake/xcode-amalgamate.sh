@@ -27,6 +27,9 @@ echo "Amalgamating target static libs $TARGET"
 
 cd $TARGET
 mkdir tmp
+
+# Remove any old library still hanging around
+rm -f libgameplay-deps.a
 mv *.a ./tmp
 
 # Now use libtool to combine all the .a libs
