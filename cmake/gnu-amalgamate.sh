@@ -27,6 +27,7 @@ echo "Amalgamating target static libs $TARGET"
 
 cd $TARGET
 mkdir tmp
+rm -f libgameplay-deps.a
 mv *.a ./tmp
 
 # Build an MRI script file
