@@ -9,15 +9,15 @@ cross-compiling.
 
 | Host     | Target Platform             | Target Arch                            
 |----------|-----------------------------|----------------------------------------
-| MacOSX   | MacOSX                      | x86_64                                 
-|          | iOS                         | arm (armv7, armv7s, arm64 combined) 
+| MacOSX   | macosx                      | x86_64                                 
+|          | ios                         | arm (armv7, armv7s, arm64 combined) 
 |          |                             | x86 (i386, x86_64 combined)
-|          | Android                     | armeabi-v7a
+|          | android                     | armeabi-v7a
 |          |                             | x86
-| Linux    | Linux                       | x86_64
-|          | Android                     | armeabi-v7a
+| Linux    | linux                       | x86_64
+|          | android                     | armeabi-v7a
 |          |                             | x86
-| Windows  | Windows                     | x86_64
+| Windows  | windows                     | x86_64
 
 
 # Compiling (Host and Target are the same)
@@ -38,7 +38,7 @@ This will build all the libraries and place them into a new "out" directory
 with the following structure:
 
 * All public headers are copied to out/external-deps/include
-* Libraries are built in out/external-deps/libs/\<target platform\>/\<target arch\>
+* Libraries are built in out/external-deps/lib/\<target platform\>/\<target arch\>
 
 When building for multiple targets, only one of those targets requires a "make
 install".  The install step will copy the public headers, which are the same
