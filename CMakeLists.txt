@@ -19,10 +19,10 @@ set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/out/external-deps")
 if(NOT ANDROID AND NOT IOS)
     # Android and iOS toolchains will set their own output path
     IF(APPLE)
-        set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/out/external-deps/libs/macosx/${ARCH}")
+        set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/out/external-deps/lib/macosx/${ARCH}")
     ELSE()
         string(TOLOWER ${CMAKE_SYSTEM_NAME} LOWER_SYSTEM_NAME)
-        set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/out/external-deps/libs/${LOWER_SYSTEM_NAME}/${ARCH}")
+        set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/out/external-deps/lib/${LOWER_SYSTEM_NAME}/${ARCH}")
     ENDIF(APPLE)
 endif(NOT ANDROID AND NOT IOS)
 
