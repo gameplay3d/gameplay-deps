@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 project(GamePlay-deps)
 
-IF(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+IF(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND NOT ANDROID)
     SET(LINUX 1)
 ENDIF(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 

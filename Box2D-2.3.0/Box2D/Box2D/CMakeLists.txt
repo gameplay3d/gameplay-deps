@@ -182,17 +182,17 @@ source_group(Dynamics\\Joints FILES ${BOX2D_Joints_SRCS} ${BOX2D_Joints_HDRS})
 source_group(Include FILES ${BOX2D_General_HDRS})
 source_group(Rope FILES ${BOX2D_Rope_SRCS} ${BOX2D_Rope_HDRS})
 
-if(BOX2D_INSTALL)
-	# install headers
-	install(FILES ${BOX2D_General_HDRS} DESTINATION include/Box2D)
-	install(FILES ${BOX2D_Collision_HDRS} DESTINATION include/Box2D/Collision)
-	install(FILES ${BOX2D_Shapes_HDRS} DESTINATION include/Box2D/Collision/Shapes)
-	install(FILES ${BOX2D_Common_HDRS} DESTINATION include/Box2D/Common)
-	install(FILES ${BOX2D_Dynamics_HDRS} DESTINATION include/Box2D/Dynamics)
-	install(FILES ${BOX2D_Contacts_HDRS} DESTINATION include/Box2D/Dynamics/Contacts)
-	install(FILES ${BOX2D_Joints_HDRS} DESTINATION include/Box2D/Dynamics/Joints)
-	install(FILES ${BOX2D_Rope_HDRS} DESTINATION include/Box2D/Rope)
+# install headers
+install(FILES ${BOX2D_General_HDRS} DESTINATION include/Box2D)
+install(FILES ${BOX2D_Collision_HDRS} DESTINATION include/Box2D/Collision)
+install(FILES ${BOX2D_Shapes_HDRS} DESTINATION include/Box2D/Collision/Shapes)
+install(FILES ${BOX2D_Common_HDRS} DESTINATION include/Box2D/Common)
+install(FILES ${BOX2D_Dynamics_HDRS} DESTINATION include/Box2D/Dynamics)
+install(FILES ${BOX2D_Contacts_HDRS} DESTINATION include/Box2D/Dynamics/Contacts)
+install(FILES ${BOX2D_Joints_HDRS} DESTINATION include/Box2D/Dynamics/Joints)
+install(FILES ${BOX2D_Rope_HDRS} DESTINATION include/Box2D/Rope)
 
+if(BOX2D_INSTALL)
 	# install libraries
 	if(BOX2D_BUILD_SHARED)
 		install(TARGETS Box2D_shared EXPORT Box2D-targets DESTINATION ${LIB_INSTALL_DIR})
