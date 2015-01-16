@@ -4,7 +4,7 @@ project(GamePlay-deps)
 
 IF(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND NOT ANDROID)
     SET(LINUX 1)
-ENDIF(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+ENDIF(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND NOT ANDROID)
 
 if(NOT ANDROID AND NOT IOS)
     # Skip any introspection for cross-compiling targets
