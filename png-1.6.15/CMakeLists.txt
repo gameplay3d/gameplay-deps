@@ -11,7 +11,7 @@ set(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
 
 set(CMAKE_CONFIGURATION_TYPES "Release;Debug;MinSizeRel;RelWithDebInfo")
 
-project(libpng C)
+project(libpng C ASM)
 enable_testing()
 
 set(PNGLIB_MAJOR 1)
@@ -104,6 +104,15 @@ set(libpng_sources
   pngwtran.c
   pngwutil.c
 )
+if (IOS AND IOS_PLATFORM STREQUAL "OS")
+set_source_files_properties(filter_neon.S PROPERTIES COMPILE_FLAGS "-x assembler-with-cpp")
+set(libpng_sources
+    ${libpng_sources}
+    arm/arm_init.c
+    arm/filter_neon.S
+    arm/filter_neon_intrinsics.c
+)
+endif (IOS AND IOS_PLATFORM STREQUAL "OS")
 set(pngtest_sources
   pngtest.c
 )
