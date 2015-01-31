@@ -63,6 +63,7 @@ add_subdirectory(ogg-1.3.2)
 add_subdirectory(vorbis-1.3.4)
 
 add_subdirectory(bullet-2.82-r2704)
+add_subdirectory(jsoncpp-1.3.0)
 
 set(BUILD_TARGETS
     Box2D
@@ -77,6 +78,7 @@ set(BUILD_TARGETS
     zlibstatic
     lua
     tinyxml2static
+    jsoncpp_lib
 )
 
 if (NOT APPLE)
