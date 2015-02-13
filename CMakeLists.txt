@@ -40,7 +40,6 @@ IF(BUILD_EXTRA_LIBS)
 ENDIF(BUILD_EXTRA_LIBS)
 
 add_subdirectory(Box2D-2.3.0)
-
 add_subdirectory(tinyxml2-2.1.0)
 add_subdirectory(lua-5.2.3)
 
@@ -64,6 +63,7 @@ add_subdirectory(vorbis-1.3.4)
 
 add_subdirectory(bullet-2.82-r2704)
 add_subdirectory(jsoncpp-1.3.0)
+add_subdirectory(base64-1.0.0)
 
 set(BUILD_TARGETS
     Box2D
@@ -79,6 +79,7 @@ set(BUILD_TARGETS
     lua
     tinyxml2static
     jsoncpp_lib
+    base64
 )
 
 if (NOT APPLE)
