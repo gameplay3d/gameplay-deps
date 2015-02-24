@@ -39,6 +39,7 @@ IF(BUILD_EXTRA_LIBS)
     add_subdirectory(sqlite-3.8.7)
 ENDIF(BUILD_EXTRA_LIBS)
 
+add_subdirectory(libjson-7.6.1)
 add_subdirectory(Box2D-2.3.0)
 add_subdirectory(tinyxml2-2.1.0)
 add_subdirectory(lua-5.2.3)
@@ -65,6 +66,7 @@ add_subdirectory(bullet-2.82-r2704)
 add_subdirectory(base64-1.0.0)
 
 set(BUILD_TARGETS
+    json
     Box2D
     BulletDynamics
     LinearMath

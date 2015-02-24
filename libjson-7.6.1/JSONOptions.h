@@ -208,7 +208,7 @@
  *  will use \t to indent formatted json, otherwise it will use the number of characters
  *  that you specify.  If this is not turned on, then it will use the tab (\t) character
  */
-//#define JSON_INDENT "    "
+#define JSON_INDENT "    "
 
 
 /*
@@ -247,7 +247,7 @@
  *  in a write_formatted.  This is common for tuples, like coordinates.  If must be defined 
  *  as an integer
  */
-//#define JSON_ARRAY_SIZE_ON_ONE_LINE 2
+#define JSON_ARRAY_SIZE_ON_ONE_LINE 16
 
 
 /*
