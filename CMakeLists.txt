@@ -62,7 +62,6 @@ add_subdirectory(ogg-1.3.2)
 add_subdirectory(vorbis-1.3.4)
 
 add_subdirectory(bullet-2.82-r2704)
-add_subdirectory(jsoncpp-1.3.0)
 add_subdirectory(base64-1.0.0)
 
 set(BUILD_TARGETS
@@ -78,7 +77,6 @@ set(BUILD_TARGETS
     zlibstatic
     lua
     tinyxml2static
-    jsoncpp_lib
     base64
 )
 
