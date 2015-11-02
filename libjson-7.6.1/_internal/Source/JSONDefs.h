@@ -66,7 +66,7 @@
 #else
     #ifdef __GNUC__
 	   #ifdef __STRICT_ANSI__
-		  #warning, Using -ansi GCC option, but JSON_ISO_STRICT not on, turning it on for you
+		  //#warning, Using -ansi GCC option, but JSON_ISO_STRICT not on, turning it on for you
 		  #define JSON_ISO_STRICT
 	   #endif
     #endif
@@ -151,6 +151,7 @@ typedef void (*json_free_t)(void *);
 		  #error, Have JSON_DEBUG on in a release build
 	   #endif
     #endif
+/*
 #else
 	#ifndef NDEBUG
 	   #ifdef __GNUC__
@@ -159,6 +160,7 @@ typedef void (*json_free_t)(void *);
 		  #error, Release build of libjson, but NDEBUG is not on
 	   #endif
 	#endif
+ */
 #endif
 
 #ifdef JSON_UNIT_TEST
