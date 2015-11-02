@@ -47,15 +47,15 @@ regardless of the target.  So it's only needed once.
 ## Windows
 
 For Windows, we generate Visual Studio project files.  It should be done from
-within a Visual Studio command prompt.  You should also have the DirectX SDK
+within a Visual Studio 2013 or 2015 command prompt.  You should also have the DirectX SDK
 installed because OpenAL should use the DirectSound back-end.  We also build
-both the Debug and Release variants.
+both the Debug and Release variants. 
 
 ```
 > cd GamePlay-deps
 > mkdir build
 > cd build
-> cmake -G"Visual Studio 12 Win64" ..
+> cmake -G"Visual Studio 14 Win64" ..
 > msbuild GamePlay-deps.sln /property:Configuration=Debug
 > msbuild GamePlay-deps.sln /property:Configuration=Release
 ```
@@ -67,7 +67,7 @@ of either cmake/ios.toolchain.cmake or cmake/android.toolchain.cmake
 
 ## iOS Setup
 
-Install XCode 6.1
+Install XCode 6
 
 ## iOS Compiling
 
