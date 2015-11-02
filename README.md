@@ -67,7 +67,7 @@ of either cmake/ios.toolchain.cmake or cmake/android.toolchain.cmake
 
 ## iOS Setup
 
-Install XCode 6.1
+Install XCode 6
 
 ## iOS Compiling
 
