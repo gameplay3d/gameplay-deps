@@ -47,7 +47,7 @@ regardless of the target.  So it's only needed once.
 ## Windows
 
 For Windows, we generate Visual Studio project files.  It should be done from
-within a Visual Studio 2013 or 2015 command prompt.  You should also have the DirectX SDK
+within a Visual Studio 2015 x64 command prompt.  You must also have the DirectX SDK
 installed because OpenAL should use the DirectSound back-end.  We also build
 both the Debug and Release variants. 
 
