@@ -93,7 +93,7 @@ need to setup a standalone toolchain directory for each of the architectures
 you want to build.  To do that:
 
 ```
-$ cd android-ndk-r10c
+$ cd android-ndk-r10e
 $ ./build/tools/make-standalone-toolchain.sh --platform=android-16 --arch=armeabi-v7a --install-dir=/path/to/android-arm
 $ ./build/tools/make-standalone-toolchain.sh --platform=android-16 --arch=x86 --install-dir=/path/to/android-x86
 ```
