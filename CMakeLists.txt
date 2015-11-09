@@ -39,8 +39,8 @@ IF(BUILD_EXTRA_LIBS)
     add_subdirectory(sqlite-3.8.7)
 ENDIF(BUILD_EXTRA_LIBS)
 
-add_subdirectory(Box2D-2.3.0)
-
+add_subdirectory(libjson-7.6.1)
+#add_subdirectory(Box2D-2.3.0)
 add_subdirectory(tinyxml2-2.1.0)
 add_subdirectory(lua-5.2.3)
 
@@ -63,9 +63,10 @@ add_subdirectory(ogg-1.3.2)
 add_subdirectory(vorbis-1.3.4)
 
 add_subdirectory(bullet-2.82-r2704)
+add_subdirectory(base64-1.0.0)
 
 set(BUILD_TARGETS
-    Box2D
+    json
     BulletDynamics
     LinearMath
     BulletCollision
@@ -77,6 +78,7 @@ set(BUILD_TARGETS
     zlibstatic
     lua
     tinyxml2static
+    base64
 )
 
 if (NOT APPLE)
