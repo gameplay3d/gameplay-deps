@@ -39,16 +39,18 @@ IF(BUILD_EXTRA_LIBS)
     add_subdirectory(sqlite-3.8.7)
 ENDIF(BUILD_EXTRA_LIBS)
 
-add_subdirectory(Box2D-2.3.0)
-
+add_subdirectory(libjson-7.6.1)
+#add_subdirectory(Box2D-2.3.0)
 add_subdirectory(tinyxml2-2.1.0)
 add_subdirectory(lua-5.2.3)
 
 if (NOT APPLE)
-    # We can safely skip GLEW and OpenAL for any Apple based platforms
-    add_subdirectory(glew-1.10.0)
     add_subdirectory(openal-1.16.0)
 endif(NOT APPLE)
+
+if (NOT APPLE AND NOT ANDROID)
+    add_subdirectory(glew-1.10.0)
+endif (NOT APPLE AND NOT ANDROID)
 
 # zlib must be built before png and curl
 add_subdirectory(zlib-1.2.8)
@@ -63,9 +65,9 @@ add_subdirectory(ogg-1.3.2)
 add_subdirectory(vorbis-1.3.4)
 
 add_subdirectory(bullet-2.82-r2704)
+add_subdirectory(base64-1.0.0)
 
 set(BUILD_TARGETS
-    Box2D
     BulletDynamics
     LinearMath
     BulletCollision
@@ -77,6 +79,8 @@ set(BUILD_TARGETS
     zlibstatic
     lua
     tinyxml2static
+    json
+    base64
 )
 
 if (NOT APPLE)

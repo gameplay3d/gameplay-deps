@@ -21,7 +21,7 @@
 #include <new>
 
 #ifdef __ANDROID__
-    #include <stdlib.h>
+    #include <string.h>
 #else 
     #include <memory.h>
 #endif

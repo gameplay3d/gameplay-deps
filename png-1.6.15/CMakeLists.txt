@@ -330,7 +330,6 @@ endif()
 
 if(NOT SKIP_INSTALL_HEADERS AND NOT SKIP_INSTALL_ALL )
   install(FILES ${libpng_public_hdrs}   DESTINATION include)
-  install(FILES ${libpng_public_hdrs}   DESTINATION include/${PNGLIB_NAME})
 endif()
 if(NOT SKIP_INSTALL_EXECUTABLES AND NOT SKIP_INSTALL_ALL )
   if(NOT WIN32 OR CYGWIN OR MINGW)
