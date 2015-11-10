@@ -18,13 +18,11 @@
 
 #include <Box2D/Common/b2BlockAllocator.h>
 #include <limits.h>
-
 #ifdef __ANDROID__
-    #include <stdlib.h>
+    #include <string.h>
 #else 
     #include <memory.h>
 #endif
-
 #include <stddef.h>
 
 int32 b2BlockAllocator::s_blockSizes[b2_blockSizes] = 

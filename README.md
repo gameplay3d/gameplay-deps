@@ -55,7 +55,7 @@ both the Debug and Release variants.
 > cd GamePlay-deps
 > mkdir build
 > cd build
-> cmake -G"Visual Studio 14 Win64" ..
+> cmake -G "Visual Studio 14 Win64" ..
 > msbuild GamePlay-deps.sln /property:Configuration=Debug
 > msbuild GamePlay-deps.sln /property:Configuration=Release
 ```
@@ -87,19 +87,19 @@ For x86 we change the IOS_PLATFORM flag:
 
 ## Android Setup
 
-Install the Android NDK (available here:
+Install the Android NDK r10e (available here:
 https://developer.android.com/tools/sdk/ndk/index.html).  Once installed you'll
 need to setup a standalone toolchain directory for each of the architectures
 you want to build.  To do that:
 
 ```
 $ cd android-ndk-r10e
-$ ./build/tools/make-standalone-toolchain.sh --platform=android-16 --arch=armeabi-v7a --install-dir=/path/to/android-arm
-$ ./build/tools/make-standalone-toolchain.sh --platform=android-16 --arch=x86 --install-dir=/path/to/android-x86
+$ ./build/tools/make-standalone-toolchain.sh --platform=android-16 --arch=arm --install-dir=/path/to/android-toolchain-arm
+$ ./build/tools/make-standalone-toolchain.sh --platform=android-16 --arch=x86 --install-dir=/path/to/android-toolchain-x86
 ```
 
 This will install the standalone toolchain directories in 
-/path/to/android-arm (for armeabi-v7a) and /path/to/android-x86 (for x86, usually simulator).
+/path/to/android-toolchain-arm (for armeabi-v7a) and /path/to/android-toolchain-x86 (for x86, usually simulator).
 
 ## Android Compiling
 
@@ -111,7 +111,8 @@ toolchain directory.  We do this prior to running cmake.
 ```
 $ cd GamePlay-deps
 $ mkdir build
-$ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-arm
+$ cd build
+$ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-arm
 $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain.cmake ..
 $ make
 ```
@@ -119,10 +120,5 @@ $ make
 For building the simulator version (or any other arch) just change the
 environment variable:
 
-` $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-x86 `
+` $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-x86 `
 
-# Building Extra Libs
-
-There's a set of additional libs that can be built by providing `cmake
--DBUILD_EXTRA_LIBS=1 ..` The extra libraries are for roadmap items, and so
-these libs aren't needed for existing functionality.
