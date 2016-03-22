@@ -35,12 +35,7 @@ ENDIF(NOT WIN32)
 file(MAKE_DIRECTORY ${LIBRARY_OUTPUT_PATH})
 message(STATUS "Directory: ${LIBRARY_OUTPUT_PATH}")
 
-IF(BUILD_EXTRA_LIBS)
-    add_subdirectory(sqlite-3.8.7)
-ENDIF(BUILD_EXTRA_LIBS)
-
 add_subdirectory(libjson-7.6.1)
-#add_subdirectory(Box2D-2.3.0)
 add_subdirectory(tinyxml2-2.1.0)
 add_subdirectory(lua-5.2.3)
 
