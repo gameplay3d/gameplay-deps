@@ -104,7 +104,7 @@ set(libpng_sources
   pngwtran.c
   pngwutil.c
 )
-if (IOS AND IOS_PLATFORM STREQUAL "OS")
+if (NEON OR (IOS AND IOS_PLATFORM STREQUAL "OS"))
 set_source_files_properties(filter_neon.S PROPERTIES COMPILE_FLAGS "-x assembler-with-cpp")
 set(libpng_sources
     ${libpng_sources}
@@ -112,7 +112,7 @@ set(libpng_sources
     arm/filter_neon.S
     arm/filter_neon_intrinsics.c
 )
-endif (IOS AND IOS_PLATFORM STREQUAL "OS")
+endif (NEON OR (IOS AND IOS_PLATFORM STREQUAL "OS"))
 set(pngtest_sources
   pngtest.c
 )
