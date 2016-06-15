@@ -1020,7 +1020,10 @@ CONFIGURE_FILE(
     @ONLY)
 
 # Build a common library with reusable helpers
-#ADD_LIBRARY(common STATIC ${COMMON_OBJS})
+IF(LIBTYPE STREQUAL "SHARED")
+    ADD_LIBRARY(common STATIC ${COMMON_OBJS})
+ENDIF()
+
 
 # Build main library
 ADD_LIBRARY(${LIBNAME} ${LIBTYPE} ${COMMON_OBJS} ${OPENAL_OBJS} ${ALC_OBJS})
