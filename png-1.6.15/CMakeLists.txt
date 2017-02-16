@@ -150,7 +150,7 @@ endif()
 
 if(PNG_STATIC)
 # does not work without changing name
-  set(PNG_LIB_NAME_STATIC ${PNG_LIB_NAME}_static)
+  set(PNG_LIB_NAME_STATIC ${PNG_LIB_NAME})
   add_library(${PNG_LIB_NAME_STATIC} STATIC ${libpng_sources})
   list(APPEND PNG_LIB_TARGETS ${PNG_LIB_NAME_STATIC})
   if(MSVC)

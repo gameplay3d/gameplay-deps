@@ -9,7 +9,7 @@ cross-compiling.
 
 | Host     | Target Platform             | Target Arch                            
 |----------|-----------------------------|----------------------------------------
-| MacOSX   | macosx                      | x86_64                                 
+| MacOS    | macos                       | x86_64                                 
 |          | ios                         | arm (armv7, armv7s, arm64 combined) 
 |          |                             | x86 (i386, x86_64 combined)
 |          | android                     | armeabi-v7a
@@ -22,7 +22,7 @@ cross-compiling.
 
 # Compiling (Host and Target are the same)
 
-## Linux and MacOSX
+## Linux and MacOS
 
 For the simple case (not cross-compiling):
 
