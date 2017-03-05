@@ -1,55 +1,28 @@
 GamePlay-deps
 =============
 
-External dependencies for GamePlay 3D framework.
-
-We are using CMake to create a single, consistent way of compiling all the
-libraries that GamePlay uses.  CMake with toolchain files are used to support
-cross-compiling.
+Open-source dependencies for GamePlay.
 
 | Host     | Target Platform             | Target Arch                            
 |----------|-----------------------------|----------------------------------------
+| Windows  | windows                     | x86_64
+| Linux    | linux                       | x86_64
+|          | android                     | armeabi-v7a
+|          |                             | x86
 | MacOS    | macos                       | x86_64                                 
 |          | ios                         | arm (armv7, armv7s, arm64 combined) 
 |          |                             | x86 (i386, x86_64 combined)
 |          | android                     | armeabi-v7a
 |          |                             | x86
-| Linux    | linux                       | x86_64
-|          | android                     | armeabi-v7a
-|          |                             | x86
-| Windows  | windows                     | x86_64
 
 
 # Compiling (Host and Target are the same)
 
-## Linux and MacOS
-
-For the simple case (not cross-compiling):
-
-```
-$ cd GamePlay-deps
-$ mkdir build
-$ cd build
-$ cmake ..
-$ make install
-```
-
-This will build all the libraries and place them into a new "out" directory
-with the following structure:
-
-* All public headers are copied to out/external-deps/include
-* Libraries are built in out/external-deps/lib/\<target platform\>/\<target arch\>
-
-When building for multiple targets, only one of those targets requires a "make
-install".  The install step will copy the public headers, which are the same
-regardless of the target.  So it's only needed once.
-
 ## Windows
 
-For Windows, we generate Visual Studio project files.  It should be done from
-within a Visual Studio 2015 x64 command prompt.  You must also have the DirectX SDK
-installed because OpenAL should use the DirectSound back-end.  We also build
-both the Debug and Release variants. 
+Generates Visual Studio project files. 
+Run commands from Visual Studio 2015 x64 command prompt. 
+Builds x86_64(x64) Debug and Release. 
 
 ```
 > cd GamePlay-deps
@@ -60,40 +33,40 @@ both the Debug and Release variants.
 > msbuild GamePlay-deps.sln /property:Configuration=Release
 ```
 
-# Cross-Compiling (Host and Target are different)
 
-For cross-compiling we need a properly setup target SDK and we need to make use
-of either cmake/ios.toolchain.cmake or cmake/android.toolchain.cmake
+## Linux and MacOS
 
-## iOS Setup
-
-Install XCode 6
-
-## iOS Compiling
-
-For arm architecture:
+Generates makefile project files.
+Run commands from Terminal console.
+Builds x86_64(x64) Release. 
 
 ```
 $ cd GamePlay-deps
 $ mkdir build
 $ cd build
-$ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DIOS_PLATFORM=OS ..
+$ cmake ..
 $ make install
 ```
 
-For x86 we change the IOS_PLATFORM flag:
+Build outputs
 
-` $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DIOS_PLATFORM=SIMULATOR .. `
+* Header ----->     out/external-deps/include
+* Libraries -->     out/external-deps/lib/\<target platform\>/\<target arch\>
+
+# Cross-Compiling (Host and Target are different)
+
+For cross-compiling we need a properly setup target SDK and we need to make use
+of either cmake/android.toolchain.cmake or cmake/ios.toolchain.cmake
 
 ## Android Setup
 
-Install the Android NDK r10e (available here:
+Install the Android NDK r12e (available here:
 https://developer.android.com/tools/sdk/ndk/index.html).  Once installed you'll
 need to setup a standalone toolchain directory for each of the architectures
 you want to build.  To do that:
 
 ```
-$ cd android-ndk-r10e
+$ cd android-ndk-r12e
 $ ./build/tools/make-standalone-toolchain.sh --platform=android-16 --arch=arm --install-dir=/path/to/android-toolchain-arm
 $ ./build/tools/make-standalone-toolchain.sh --platform=android-16 --arch=x86 --install-dir=/path/to/android-toolchain-x86
 ```
@@ -122,3 +95,23 @@ environment variable:
 
 ` $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-x86 `
 
+
+## iOS Setup
+
+Install XCode
+
+## iOS Compiling
+
+For arm architecture:
+
+```
+$ cd GamePlay-deps
+$ mkdir build
+$ cd build
+$ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DIOS_PLATFORM=OS ..
+$ make install
+```
+
+For x86 we change the IOS_PLATFORM flag:
+
+` $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DIOS_PLATFORM=SIMULATOR .. `
