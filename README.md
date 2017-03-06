@@ -85,6 +85,7 @@ $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain.cmake ..
 $ make
 ```
 For building the simulator version (or another arch) just change the environment variable:
+
 ` $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-x86 `
 
 
@@ -94,7 +95,9 @@ Install XCode
 
 ## iOS Compiling
 
-For arm architecture:
+* Generates makefile build targets.
+* Run from platform terminal.
+* Builds the arm architecture that combines armv7,armv7s and arm64.
 
 ```
 $ cd GamePlay-deps
@@ -104,5 +107,6 @@ $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DIOS_PLATFORM=OS ..
 $ make install
 ```
 
-For building the simulator version we change the IOS_PLATFORM flag:
+For building simulator version we change the IOS_PLATFORM flag:
+
 ` $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DIOS_PLATFORM=SIMULATOR .. `
