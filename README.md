@@ -101,22 +101,10 @@ $ python make_standalone_toolchain.py --arch arm --api 24 --install-dir ~/androi
 $ cd GamePlay-deps
 $ mkdir build
 $ cd build
-$ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-arm
+$ export ANDROID_STANDALONE_TOOLCHAIN=~/android-toolchain-arm
 $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain.cmake ..
 $ make
 ```
-
-* Aternative: Build simulator x86 target (or another architecture) by changing the environment variable:
-
-* Windows
-
-` > set ANDROID_STANDALONE_TOOLCHAIN=C:\android-toolchain-arm`
-
-* Linux
-
-` $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-x86`
-
-
 
 ## iOS Setup
 
