@@ -39,7 +39,7 @@ Build outputs:
 ## Linux setup
 * Install dev tools
 ```
-sudo apt-get install build-essential gcc cmake libglu1-mesa-dev libogg-dev libopenal-dev libgtk2.0-dev curl libpcrecpp0:i386 lib32z1-dev
+sudo apt-get install build-essential gcc cmake libogg-dev libopenal-dev libgtk2.0-dev curl libpcrecpp0:i386 lib32z1-dev
 ```
 * Run commands from terminal console.
 * Builds x86_64 Release target with the following commands:
