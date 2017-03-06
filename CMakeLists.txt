@@ -37,7 +37,9 @@ add_subdirectory(zlib-1.2.8)
 add_subdirectory(png-1.6.15)
 add_subdirectory(ogg-1.3.2)
 add_subdirectory(vorbis-1.3.5)
-add_subdirectory(assimp-3.3.1)
+if(NOT ANDROID AND NOT IOS)
+    add_subdirectory(assimp-3.3.1)
+endif(NOT ANDROID AND NOT IOS)
 
 set(BUILD_TARGETS
     freetype
