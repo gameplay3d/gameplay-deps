@@ -57,8 +57,8 @@ Build outputs:
 
 ## Android Setup
 
-Install the Android NDK r12b available here:
-https://developer.android.com/tools/sdk/ndk/index.html).  
+Install NVIDIA CodeWorks for Android 1R6 (includes Android SDK and NDK):
+https://developer.nvidia.com/codeworks-android
 
 * Once installed, setup a standalone toolchain directory for each architecture you want to build:
 * Run from Windows mingw command prompt or Linux/MacOS terminal console:
