@@ -75,21 +75,46 @@ $ make install
 * Install NVIDIA CodeWorks for Android 1R6 (includes Android SDK and NDK):
 
 https://developer.nvidia.com/codeworks-android
-* Run from MinGW (Windows) or Terminal console (Linux/MacOS) 
-* Setup stand-alone toolchain with the following commands:
+
+This installs to C:\NVPACK on Windows or ~\NVPACK (Linux)
+
+On Windows host:
+* Run following in 'VS2015 x64 Native Tools Command Prompt':
 
 ```
-$ cd android-ndk-r12b/build/tools
-$ python make_standalone_toolchain.py --arch arm --api 24 --install-dir /path/to/android-toolchain-arm
+> cd C:\NVPACK\android-ndk-r12b/build/tools
+> python make_standalone_toolchain.py --arch arm --api 24 --install-dir C:\android-toolchain-arm
 ```
 * This installs the standalone toolchain directories in:
 
 ```
-/path/to/android-toolchain-arm
+ C:\android-toolchain-arm
 ```
 * Generates vs2015 projects (Windows) and make file (Linux)
 * Run from terminal console.
 * Builds arm target with the following commands:
+
+```
+> cd GamePlay-deps
+> mkdir build
+> cd build
+> set ANDROID_STANDALONE_TOOLCHAIN=C:\android-toolchain-arm
+> cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain.cmake ..
+> msbuild GamePlay-deps.sln /property:Configuration=Release
+```
+
+On Linux host:
+* Run following in terminal console:
+
+```
+> cd ~/NVPACK/android-ndk-r12b/build/tools
+> python make_standalone_toolchain.py --arch arm --api 24 --install-dir ~/android-toolchain-arm
+```
+* This installs the standalone toolchain directories in:
+
+```
+ ~/android-toolchain-arm
+```
 
 ```
 $ cd GamePlay-deps
@@ -97,23 +122,16 @@ $ mkdir build
 $ cd build
 $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-arm
 $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain.cmake ..
-```
-* On Linux build android Relese target using:
-
-```
 $ make
 ```
 
-* On Windows build android Release target using:
-
-```
-msbuild GamePlay-deps.sln /property:Configuration=Release
-```
-
-
 * Aternative: Build simulator x86 target (or another architecture) by changing the environment variable:
 
-` $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-x86 `
+* Windows
+` > set ANDROID_STANDALONE_TOOLCHAIN=C:\android-toolchain-arm`
+* Linux
+` $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-x86`
+
 
 
 ## iOS Setup
