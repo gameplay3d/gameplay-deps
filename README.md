@@ -84,17 +84,6 @@ On Windows host:
 ```
 > cd C:\NVPACK\android-ndk-r12b/build/tools
 > python make_standalone_toolchain.py --arch arm --api 24 --install-dir C:\android-toolchain-arm
-```
-* This installs the standalone toolchain directories in:
-
-```
- C:\android-toolchain-arm
-```
-* Generates vs2015 projects (Windows) and make file (Linux)
-* Run from terminal console.
-* Builds arm target with the following commands:
-
-```
 > cd GamePlay-deps
 > mkdir build
 > cd build
@@ -107,16 +96,8 @@ On Linux host:
 * Run following in terminal console:
 
 ```
-> cd ~/NVPACK/android-ndk-r12b/build/tools
-> python make_standalone_toolchain.py --arch arm --api 24 --install-dir ~/android-toolchain-arm
-```
-* This installs the standalone toolchain directories in:
-
-```
- ~/android-toolchain-arm
-```
-
-```
+$ cd ~/NVPACK/android-ndk-r12b/build/tools
+$ python make_standalone_toolchain.py --arch arm --api 24 --install-dir ~/android-toolchain-arm
 $ cd GamePlay-deps
 $ mkdir build
 $ cd build
@@ -128,8 +109,11 @@ $ make
 * Aternative: Build simulator x86 target (or another architecture) by changing the environment variable:
 
 * Windows
+
 ` > set ANDROID_STANDALONE_TOOLCHAIN=C:\android-toolchain-arm`
+
 * Linux
+
 ` $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-x86`
 
 
@@ -147,6 +131,7 @@ $ cd build
 $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DIOS_PLATFORM=OS ..
 $ make install
 ```
+
 * Alternatively: Build simulator x86 target by changing the IOS_PLATFORM parameter:
 
 ` $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DIOS_PLATFORM=SIMULATOR .. `
