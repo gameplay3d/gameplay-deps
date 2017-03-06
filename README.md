@@ -5,15 +5,15 @@ Open-source dependencies for GamePlay.
 
 | Host     | Target Platform             | Target Arch                            
 |----------|-----------------------------|----------------------------------------
-| Windows  | windows                     | x86_64
+| Windows  | windows                     | x86_64 (x64)
+|          | android                     | arm (armeabi-v7a)
+|          |                             | x86
 | Linux    | linux                       | x86_64
-|          | android                     | armeabi-v7a
+|          | android                     | arm (armeabi-v7a)
 |          |                             | x86
 | MacOS    | macos                       | x86_64                                 
 |          | ios                         | arm (armv7, armv7s, arm64) 
 |          |                             | x86 (i386, x86_64)
-|          | android                     | arm (armeabi-v7a)
-|          |                             | x86
 
 Build outputs:
 
