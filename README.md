@@ -21,7 +21,7 @@ Open-source dependencies for GamePlay.
 ## Windows
 
 Generates Visual Studio project files. 
-Run commands from Visual Studio 2015 x64 command prompt. 
+Run commands from 'VS2015 x64 Native Tools Command Prompt'. 
 Builds x86_64(x64) Debug and Release. 
 
 ```
@@ -46,12 +46,13 @@ $ mkdir build
 $ cd build
 $ cmake ..
 $ make install
-```
 
+```
 Build outputs
 
 * Header ----->     out/external-deps/include
 * Libraries -->     out/external-deps/lib/\<target platform\>/\<target arch\>
+
 
 # Cross-Compiling (Host and Target are different)
 
@@ -66,13 +67,12 @@ need to setup a standalone toolchain directory for each of the architectures
 you want to build.  To do that:
 
 ```
-$ cd android-ndk-r12e
-$ ./build/tools/make-standalone-toolchain.sh --platform=android-16 --arch=arm --install-dir=/path/to/android-toolchain-arm
-$ ./build/tools/make-standalone-toolchain.sh --platform=android-16 --arch=x86 --install-dir=/path/to/android-toolchain-x86
+$ cd android-ndk-r12
+$ ./build/tools/make-standalone-toolchain.sh --platform=android-24 --arch=arm --install-dir=/path/to/android-toolchain-arm
 ```
 
-This will install the standalone toolchain directories in 
-/path/to/android-toolchain-arm (for armeabi-v7a) and /path/to/android-toolchain-x86 (for x86, usually simulator).
+This will install the standalone toolchain directories in: 
+/path/to/android-toolchain-arm (for armeabi-v7a)
 
 ## Android Compiling
 
@@ -89,10 +89,8 @@ $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-arm
 $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain.cmake ..
 $ make
 ```
-
 For building the simulator version (or any other arch) just change the
 environment variable:
-
 ` $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-x86 `
 
 
@@ -112,6 +110,6 @@ $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DIOS_PLATFORM=OS ..
 $ make install
 ```
 
-For x86 we change the IOS_PLATFORM flag:
+For building the simulator version we change the IOS_PLATFORM flag:
 
 ` $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DIOS_PLATFORM=SIMULATOR .. `
