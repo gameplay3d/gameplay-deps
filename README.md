@@ -57,7 +57,7 @@ $ make install
 
 * Install Xcode
 * Run commands from terminal console.
-* Builds x86_64 Release target with the following commands:
+* Build x86_64 Release target with the following commands:
 
 ```
 $ cd GamePlay-deps
@@ -82,14 +82,14 @@ https://developer.nvidia.com/codeworks-android
 $ cd android-ndk-r12b/build/tools
 $ python make_standalone_toolchain.py --arch arm --api 24 --install-dir /path/to/android-toolchain-arm
 ```
-* This will install the standalone toolchain directories in:
+* This installs the standalone toolchain directories in:
 
 ```
 /path/to/android-toolchain-arm
 ```
 * Generates ndk-build build targets.
 * Run from terminal console.
-* Builds the arm or x86 targets with the following commands:
+* Builds arm target with the following commands:
 
 ```
 $ cd GamePlay-deps
@@ -99,7 +99,7 @@ $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-arm
 $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain.cmake ..
 $ make
 ```
-Build the simulator target (or another architecture) by changing the environment variable:
+* Build simulator x86 target (or another architecture) by changing the environment variable:
 
 ` $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-x86 `
 
@@ -108,7 +108,7 @@ Build the simulator target (or another architecture) by changing the environment
 
 * Install XCode
 * Run from terminal console.
-* Builds the arm architecture which combines armv7,armv7s and arm64 for iPhone or iPad.
+* Builds arm target with the following commands:
 
 ```
 $ cd GamePlay-deps
@@ -117,7 +117,6 @@ $ cd build
 $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DIOS_PLATFORM=OS ..
 $ make install
 ```
-
-Build the simulator target by changing the IOS_PLATFORM parameter:
+* Build simulator x86 target by changing the IOS_PLATFORM parameter:
 
 ` $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DIOS_PLATFORM=SIMULATOR .. `
