@@ -87,7 +87,7 @@ $ python make_standalone_toolchain.py --arch arm --api 24 --install-dir /path/to
 ```
 /path/to/android-toolchain-arm
 ```
-* Generates ndk-build build targets.
+* Generates vs2015 projects (Windows) and make file (Linux)
 * Run from terminal console.
 * Builds arm target with the following commands:
 
@@ -97,9 +97,21 @@ $ mkdir build
 $ cd build
 $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-arm
 $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain.cmake ..
+```
+* On Linux build android Relese target using:
+
+```
 $ make
 ```
-* Build simulator x86 target (or another architecture) by changing the environment variable:
+
+* On Windows build android Release target using:
+
+```
+msbuild GamePlay-deps.sln /property:Configuration=Release
+```
+
+
+* Aternative: Build simulator x86 target (or another architecture) by changing the environment variable:
 
 ` $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-x86 `
 
@@ -117,6 +129,6 @@ $ cd build
 $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DIOS_PLATFORM=OS ..
 $ make install
 ```
-* Build simulator x86 target by changing the IOS_PLATFORM parameter:
+* Alternatively: Build simulator x86 target by changing the IOS_PLATFORM parameter:
 
 ` $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DIOS_PLATFORM=SIMULATOR .. `
