@@ -50,7 +50,6 @@ $ mkdir build
 $ cd build
 $ cmake ..
 $ make install
-
 ```
 
 ## MacOS setup
@@ -65,7 +64,6 @@ $ mkdir build
 $ cd build
 $ cmake ..
 $ make install
-
 ```
 
 # Cross-Compiling (Host and Target are different)
