@@ -10,8 +10,8 @@ Open-source dependencies for GamePlay.
 |          | android                     | armeabi-v7a
 |          |                             | x86
 | MacOS    | macos                       | x86_64                                 
-|          | ios                         | arm (armv7,armv7s,arm64) 
-|          |                             | x86 (i386,x86_64)
+|          | ios                         | arm (armv7, armv7s, arm64) 
+|          |                             | x86 (i386, x86_64)
 |          | android                     | arm (armeabi-v7a)
 |          |                             | x86
 
@@ -25,7 +25,7 @@ Build outputs:
 ## Windows setup
 * Install Visual Studio 2015 with Windows 10 platform SDK.
 * Run 'VS2015 x64 Native Tools Command Prompt'. 
-* Builds x86_64(x64) Debug and Release with the following commands:
+* Builds x86_64 (x64) Debug and Release targets with the following commands:
 
 ```
 > cd GamePlay-deps
@@ -42,7 +42,7 @@ Build outputs:
 sudo apt-get install build-essential gcc cmake libglu1-mesa-dev libogg-dev libopenal-dev libgtk2.0-dev curl libpcrecpp0:i386 lib32z1-dev
 ```
 * Run commands from terminal console.
-* Builds x86_64(x64) Release with the following commands:
+* Builds x86_64 Release target with the following commands:
 
 ```
 $ cd GamePlay-deps
@@ -57,7 +57,7 @@ $ make install
 
 * Install Xcode
 * Run commands from terminal console.
-* Builds x86_64(x64) Release with the following commands:
+* Builds x86_64 Release target with the following commands:
 
 ```
 $ cd GamePlay-deps
@@ -84,10 +84,12 @@ $ python make_standalone_toolchain.py --arch arm --api 24 --install-dir /path/to
 ```
 * This will install the standalone toolchain directories in:
 
+```
 /path/to/android-toolchain-arm
+```
 * Generates ndk-build build targets.
 * Run from terminal console.
-* Builds the specified arm or x86 architecture with the following commands:
+* Builds the arm or x86 targets with the following commands:
 
 ```
 $ cd GamePlay-deps
@@ -97,7 +99,7 @@ $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-arm
 $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain.cmake ..
 $ make
 ```
-For building the simulator version (or another arch) just change the environment variable:
+Build the simulator target (or another architecture) by changing the environment variable:
 
 ` $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-x86 `
 
@@ -116,6 +118,6 @@ $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DIOS_PLATFORM=OS ..
 $ make install
 ```
 
-For building simulator version we change the IOS_PLATFORM flag:
+Build the simulator target by changing the IOS_PLATFORM parameter:
 
 ` $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DIOS_PLATFORM=SIMULATOR .. `
