@@ -15,13 +15,17 @@ Open-source dependencies for GamePlay.
 |          | android                     | arm (armeabi-v7a)
 |          |                             | x86
 
+Build outputs:
+
+* Header ----->     out/external-deps/include
+* Libraries -->     out/external-deps/lib/\<target platform\>/\<target arch\>
 
 # Compiling (Host and Target are the same)
 
 ## Windows setup
-
+* Install Visual Studio 2015 with Windows 10 platform SDK.
 * Run 'VS2015 x64 Native Tools Command Prompt'. 
-* Builds x86_64(x64) Debug and Release with the following commands
+* Builds x86_64(x64) Debug and Release with the following commands:
 
 ```
 > cd GamePlay-deps
@@ -32,9 +36,13 @@ Open-source dependencies for GamePlay.
 > msbuild GamePlay-deps.sln /property:Configuration=Release
 ```
 
-## Linux and MacOS setup
+## Linux setup
+* Install dev tools
+```
+sudo apt-get install build-essential gcc cmake libglu1-mesa-dev libogg-dev libopenal-dev libgtk2.0-dev curl libpcrecpp0:i386 lib32z1-dev
+```
 * Run commands from terminal console.
-* Builds x86_64(x64) Release. 
+* Builds x86_64(x64) Release with the following commands:
 
 ```
 $ cd GamePlay-deps
@@ -45,35 +53,41 @@ $ make install
 
 ```
 
-Build outputs:
+## MacOS setup
 
-* Header ----->     out/external-deps/include
-* Libraries -->     out/external-deps/lib/\<target platform\>/\<target arch\>
+* Install Xcode
+* Run commands from terminal console.
+* Builds x86_64(x64) Release with the following commands:
+
+```
+$ cd GamePlay-deps
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make install
+
+```
 
 # Cross-Compiling (Host and Target are different)
 
 ## Android Setup
 
-Install NVIDIA CodeWorks for Android 1R6 (includes Android SDK and NDK):
+* Install NVIDIA CodeWorks for Android 1R6 (includes Android SDK and NDK):
 
 https://developer.nvidia.com/codeworks-android
-
-* Setup stand-alone toolchain running the following:
-* Requires MinGW (Windows) or Terminal (Linux/MacOS)
+* Run from MinGW (Windows) or Terminal console (Linux/MacOS) 
+* Setup stand-alone toolchain with the following commands:
 
 ```
 $ cd android-ndk-r12b/build/tools
 $ python make_standalone_toolchain.py --arch arm --api 24 --install-dir /path/to/android-toolchain-arm
 ```
+* This will install the standalone toolchain directories in:
 
-This will install the standalone toolchain directories in: 
 /path/to/android-toolchain-arm
-
-## Android Compiling
-
 * Generates ndk-build build targets.
 * Run from terminal console.
-* Builds the specified android architecture.
+* Builds the specified arm or x86 architecture with the following commands:
 
 ```
 $ cd GamePlay-deps
@@ -90,10 +104,7 @@ For building the simulator version (or another arch) just change the environment
 
 ## iOS Setup
 
-Install XCode
-
-## iOS Compiling
-
+* Install XCode
 * Run from terminal console.
 * Builds the arm architecture which combines armv7,armv7s and arm64 for iPhone or iPad.
 
