@@ -18,11 +18,10 @@ Open-source dependencies for GamePlay.
 
 # Compiling (Host and Target are the same)
 
-## Windows
+## Windows setup
 
-* Generates Visual Studio 2015 project files. 
-* Run commands from 'VS2015 x64 Native Tools Command Prompt'. 
-* Builds x86_64(x64) Debug and Release. 
+* Run 'VS2015 x64 Native Tools Command Prompt'. 
+* Builds x86_64(x64) Debug and Release with the following commands
 
 ```
 > cd GamePlay-deps
@@ -33,10 +32,8 @@ Open-source dependencies for GamePlay.
 > msbuild GamePlay-deps.sln /property:Configuration=Release
 ```
 
-## Linux and MacOS
-
-* Generates makefile project files.
-* Run commands from Terminal console.
+## Linux and MacOS setup
+* Run commands from terminal console.
 * Builds x86_64(x64) Release. 
 
 ```
@@ -58,10 +55,11 @@ Build outputs:
 ## Android Setup
 
 Install NVIDIA CodeWorks for Android 1R6 (includes Android SDK and NDK):
+
 https://developer.nvidia.com/codeworks-android
 
-* Once installed, setup a standalone toolchain directory for each architecture you want to build:
-* Run from Windows mingw command prompt or Linux/MacOS terminal console:
+* Setup stand-alone toolchain running the following:
+* Requires MinGW (Windows) or Terminal (Linux/MacOS)
 
 ```
 $ cd android-ndk-r12b/build/tools
@@ -72,8 +70,9 @@ This will install the standalone toolchain directories in:
 /path/to/android-toolchain-arm
 
 ## Android Compiling
+
 * Generates ndk-build build targets.
-* Run from platform console/terminal.
+* Run from terminal console.
 * Builds the specified android architecture.
 
 ```
@@ -95,9 +94,8 @@ Install XCode
 
 ## iOS Compiling
 
-* Generates makefile build targets.
-* Run from platform terminal.
-* Builds the arm architecture that combines armv7,armv7s and arm64.
+* Run from terminal console.
+* Builds the arm architecture which combines armv7,armv7s and arm64 for iPhone or iPad.
 
 ```
 $ cd GamePlay-deps
