@@ -22,4 +22,4 @@ endif(APPLE)
 
 add_library(json ${LIBJSON_SRC})
 
-install(FILES ${LIBJSON_HDR} DESTINATION include/libjson/_internal/Source)
+install(FILES ${LIBJSON_HDR} DESTINATION include/json/_internal/Source)

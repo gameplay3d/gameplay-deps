@@ -80,6 +80,8 @@ cmake_minimum_required(VERSION 2.6)
 
 include(CheckIncludeFile)
 
+set(SKIP_INSTALL_LIBRARIES ON)
+
 
 # CMAKE_TOOLCHAIN_FILE must be set before `project' is called, which
 # configures the base build environment and references the toolchain file
@@ -396,7 +398,7 @@ endif ()
 # Note the trailing slash in the argument to the `DIRECTORY' directive
 if (NOT SKIP_INSTALL_HEADERS AND NOT SKIP_INSTALL_ALL)
   install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/
-    DESTINATION include/freetype2
+    DESTINATION include
     PATTERN "internal" EXCLUDE
     PATTERN "ftconfig.h" EXCLUDE
     PATTERN "ftoption.h" EXCLUDE
@@ -404,7 +406,7 @@ if (NOT SKIP_INSTALL_HEADERS AND NOT SKIP_INSTALL_ALL)
   install(FILES
     ${PROJECT_BINARY_DIR}/include/freetype/config/ftconfig.h
     ${PROJECT_BINARY_DIR}/include/freetype/config/ftoption.h
-    DESTINATION include/freetype2/freetype/config
+    DESTINATION include/freetype/config
     )
 endif ()
 
