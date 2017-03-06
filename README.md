@@ -10,9 +10,9 @@ Open-source dependencies for GamePlay.
 |          | android                     | armeabi-v7a
 |          |                             | x86
 | MacOS    | macos                       | x86_64                                 
-|          | ios                         | arm (armv7, armv7s, arm64 combined) 
-|          |                             | x86 (i386, x86_64 combined)
-|          | android                     | armeabi-v7a
+|          | ios                         | arm (armv7,armv7s,arm64) 
+|          |                             | x86 (i386,x86_64)
+|          | android                     | arm (armeabi-v7a)
 |          |                             | x86
 
 
@@ -20,9 +20,9 @@ Open-source dependencies for GamePlay.
 
 ## Windows
 
-Generates Visual Studio project files. 
-Run commands from 'VS2015 x64 Native Tools Command Prompt'. 
-Builds x86_64(x64) Debug and Release. 
+* Generates Visual Studio 2015 project files. 
+* Run commands from 'VS2015 x64 Native Tools Command Prompt'. 
+* Builds x86_64(x64) Debug and Release. 
 
 ```
 > cd GamePlay-deps
@@ -33,12 +33,11 @@ Builds x86_64(x64) Debug and Release.
 > msbuild GamePlay-deps.sln /property:Configuration=Release
 ```
 
-
 ## Linux and MacOS
 
-Generates makefile project files.
-Run commands from Terminal console.
-Builds x86_64(x64) Release. 
+* Generates makefile project files.
+* Run commands from Terminal console.
+* Builds x86_64(x64) Release. 
 
 ```
 $ cd GamePlay-deps
@@ -48,38 +47,34 @@ $ cmake ..
 $ make install
 
 ```
-Build outputs
+
+Build outputs:
 
 * Header ----->     out/external-deps/include
 * Libraries -->     out/external-deps/lib/\<target platform\>/\<target arch\>
 
-
 # Cross-Compiling (Host and Target are different)
-
-For cross-compiling we need a properly setup target SDK and we need to make use
-of either cmake/android.toolchain.cmake or cmake/ios.toolchain.cmake
 
 ## Android Setup
 
-Install the Android NDK r12e (available here:
-https://developer.android.com/tools/sdk/ndk/index.html).  Once installed you'll
-need to setup a standalone toolchain directory for each of the architectures
-you want to build.  To do that:
+Install the Android NDK r12b available here:
+https://developer.android.com/tools/sdk/ndk/index.html).  
+
+* Once installed, setup a standalone toolchain directory for each architecture you want to build:
+* Run from Windows mingw command prompt or Linux/MacOS terminal console:
 
 ```
-$ cd android-ndk-r12
-$ ./build/tools/make-standalone-toolchain.sh --platform=android-24 --arch=arm --install-dir=/path/to/android-toolchain-arm
+$ cd android-ndk-r12b/build/tools
+$ python make_standalone_toolchain.py --arch arm --api 24 --install-dir /path/to/android-toolchain-arm
 ```
 
 This will install the standalone toolchain directories in: 
-/path/to/android-toolchain-arm (for armeabi-v7a)
+/path/to/android-toolchain-arm
 
 ## Android Compiling
-
-With the standalone toolchain directories in place, we can run cmake using the
-android.toolchain.cmake.  For this toolchain file we set the
-ANDROID_STANDALONE_TOOLCHAIN environment variable to the appropriate standalone
-toolchain directory.  We do this prior to running cmake.
+* Generates ndk-build build targets.
+* Run from platform console/terminal.
+* Builds the specified android architecture.
 
 ```
 $ cd GamePlay-deps
@@ -89,8 +84,7 @@ $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-arm
 $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain.cmake ..
 $ make
 ```
-For building the simulator version (or any other arch) just change the
-environment variable:
+For building the simulator version (or another arch) just change the environment variable:
 ` $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-x86 `
 
 
@@ -111,5 +105,4 @@ $ make install
 ```
 
 For building the simulator version we change the IOS_PLATFORM flag:
-
 ` $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DIOS_PLATFORM=SIMULATOR .. `
