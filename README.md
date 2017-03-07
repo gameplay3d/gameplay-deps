@@ -92,7 +92,7 @@ $ cd GamePlay-deps
 $ mkdir build
 $ cd build
 $ export ANDROID_STANDALONE_TOOLCHAIN=~/android-toolchain-arm
-$ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain.cmake ..
+$ cmake -G"Unix Makefiles" -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain.cmake ..
 $ make
 ```
 
