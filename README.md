@@ -87,12 +87,12 @@ On Linux host:
 
 ```
 $ cd /path/to/NVPACK/android-ndk-r12b/build/tools
-$ python make_standalone_toolchain.py --arch arm --api 24 --install-dir /path/to/android-toolchain-arm
+$ python make_standalone_toolchain.py --arch arm --api 24 --install-dir ~/android-toolchain-arm
 $ cd GamePlay-deps
 $ mkdir build
 $ cd build
-$ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-arm
-$ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain.cmake ..
+$ export ANDROID_STANDALONE_TOOLCHAIN=~/android-toolchain-arm
+$ cmake -G"Unix Makefiles" -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain.cmake ..
 $ make
 ```
 
