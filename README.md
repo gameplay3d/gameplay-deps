@@ -74,7 +74,7 @@ $ make install
 
 https://developer.nvidia.com/codeworks-android
 
-This installs to C:\NVPACK on Windows or ~\NVPACK (Linux)
+Installs to C:\NVPACK (Windows) or ~/NVPACK (Linux)
 
 On Windows host:
 * Install MinGW
@@ -86,7 +86,7 @@ On Linux host:
 * Run following in terminal shell:
 
 ```
-$ cd /path/to/android-ndk-r12b/build/tools
+$ cd /path/to/NVPACK/android-ndk-r12b/build/tools
 $ python make_standalone_toolchain.py --arch arm --api 24 --install-dir /path/to/android-toolchain-arm
 $ cd GamePlay-deps
 $ mkdir build
