@@ -10,8 +10,9 @@ set(LIBJSON_HDR JSONAllocator.h  JSONMemoryPool.h JSONStream.h
         JSONDebug.h  JSONPreparse.h  JSONWorker.h
         JSONDefs.h  JSONSharedString.h JSON_Base64.h
         JSONGlobals.h  JSONSingleton.h  NumberToString.h
-        JSONMemory.h  JSONStats.h  internalJSONNode.h
-        JSONDefs/GNU_C.h JSONDefs/Strings_Defs.h JSONDefs/Unknown_C.h
+        JSONMemory.h  JSONStats.h  internalJSONNode.h)
+
+set(LIBJSON_HDR_DEFS JSONDefs/GNU_C.h JSONDefs/Strings_Defs.h JSONDefs/Unknown_C.h
         JSONDefs/Visual_C.h)
 
 if(APPLE)
@@ -23,3 +24,4 @@ endif(APPLE)
 add_library(json ${LIBJSON_SRC})
 
 install(FILES ${LIBJSON_HDR} DESTINATION include/json/_internal/Source)
+install(FILES ${LIBJSON_HDR_DEFS} DESTINATION include/json/_internal/Source/JSONDefs)

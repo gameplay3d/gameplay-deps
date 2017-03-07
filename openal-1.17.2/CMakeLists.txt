@@ -41,7 +41,7 @@ OPTION(ALSOFT_TESTS     "Build and install test programs"     OFF)
 
 OPTION(ALSOFT_CONFIG "Install alsoft.conf sample configuration file" OFF)
 OPTION(ALSOFT_HRTF_DEFS "Install HRTF definition files" OFF)
-OPTION(ALSOFT_INSTALL "Install headers and libraries" OFF)
+OPTION(ALSOFT_INSTALL "Install headers and libraries" ON)
 
 
 set(SHARE_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/share" CACHE STRING "The share install dir")
