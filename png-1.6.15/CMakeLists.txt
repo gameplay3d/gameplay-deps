@@ -22,7 +22,8 @@ set(PNGLIB_VERSION ${PNGLIB_MAJOR}.${PNGLIB_MINOR}.${PNGLIB_RELEASE})
 
 # needed packages
 #find_package(ZLIB REQUIRED)
-#include_directories(${ZLIB_INCLUDE_DIR})
+set(ZLIB_INCLUDE_DIR ${PROJECT_BINARY_DIR}/../zlib-1.2.8)
+include_directories(${ZLIB_INCLUDE_DIR})
 include_directories("${PROJECT_BINARY_DIR}/../zlib-1.2.8")
 include_directories("${PROJECT_SOURCE_DIR}/../zlib-1.2.8")
 set(SKIP_INSTALL_FILES 1)
@@ -150,7 +151,7 @@ endif()
 
 if(PNG_STATIC)
 # does not work without changing name
-  set(PNG_LIB_NAME_STATIC ${PNG_LIB_NAME}_static)
+  set(PNG_LIB_NAME_STATIC ${PNG_LIB_NAME})
   add_library(${PNG_LIB_NAME_STATIC} STATIC ${libpng_sources})
   list(APPEND PNG_LIB_TARGETS ${PNG_LIB_NAME_STATIC})
   if(MSVC)

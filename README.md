@@ -1,55 +1,31 @@
 GamePlay-deps
 =============
 
-External dependencies for GamePlay 3D framework.
-
-We are using CMake to create a single, consistent way of compiling all the
-libraries that GamePlay uses.  CMake with toolchain files are used to support
-cross-compiling.
+Open-source dependencies for GamePlay.
 
 | Host     | Target Platform             | Target Arch                            
 |----------|-----------------------------|----------------------------------------
-| MacOSX   | macosx                      | x86_64                                 
-|          | ios                         | arm (armv7, armv7s, arm64 combined) 
-|          |                             | x86 (i386, x86_64 combined)
-|          | android                     | armeabi-v7a
+| Windows  | windows                     | x86_64 (x64)
+|          | android                     | arm (armeabi-v7a)
 |          |                             | x86
 | Linux    | linux                       | x86_64
-|          | android                     | armeabi-v7a
+|          | android                     | arm (armeabi-v7a)
 |          |                             | x86
-| Windows  | windows                     | x86_64
+| MacOS    | macos                       | x86_64                                 
+|          | ios                         | arm (armv7, armv7s, arm64) 
+|          |                             | x86 (i386, x86_64)
 
+Build outputs:
+
+* Header ----->     out/external-deps/include
+* Libraries -->     out/external-deps/lib/\<target platform\>/\<target arch\>
 
 # Compiling (Host and Target are the same)
 
-## Linux and MacOSX
-
-For the simple case (not cross-compiling):
-
-```
-$ cd GamePlay-deps
-$ mkdir build
-$ cd build
-$ cmake ..
-$ make install
-```
-
-This will build all the libraries and place them into a new "out" directory
-with the following structure:
-
-* All public headers are copied to out/external-deps/include
-* Libraries are built in out/external-deps/lib/\<target platform\>/\<target arch\>
-
-When building for multiple targets, only one of those targets requires a "make
-install".  The install step will copy the public headers, which are the same
-regardless of the target.  So it's only needed once.
-
-## Windows
-
-For Windows, we generate Visual Studio project files.  It should be done from
-within a Visual Studio 2015 x64 command prompt.  You must also have the DirectX SDK
-installed because OpenAL should use the DirectSound back-end.  We also build
-both the Debug and Release variants. 
+## Windows setup
+* Install Visual Studio 2015 with Windows 10 platform SDK.
+* Run 'VS2015 x64 Native Tools Command Prompt'.
+* Builds x86_64 (x64) Debug and Release targets with the following commands:
 
 ```
 > cd GamePlay-deps
@@ -60,18 +36,72 @@ both the Debug and Release variants.
 > msbuild GamePlay-deps.sln /property:Configuration=Release
 ```
 
+## Linux setup
+* Install dev tools
+```
+sudo apt-get install build-essential gcc cmake libopenal-dev libgtk2.0-dev curl libpcrecpp0:i386 lib32z1-dev
+```
+* Run commands from terminal shell.
+* Builds x86_64 Release target with the following commands:
+
+```
+$ cd GamePlay-deps
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make install
+```
+
+## MacOS setup
+
+* Install Xcode
+* Run commands from terminal shell.
+* Build x86_64 Release target with the following commands:
+
+```
+$ cd GamePlay-deps
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make install
+```
+
 # Cross-Compiling (Host and Target are different)
 
-For cross-compiling we need a properly setup target SDK and we need to make use
-of either cmake/ios.toolchain.cmake or cmake/android.toolchain.cmake
+## Android Setup
+
+* Install NVIDIA CodeWorks for Android 1R6 (includes Android SDK and NDK)
+
+https://developer.nvidia.com/codeworks-android
+
+Installs to C:\NVPACK (Windows) or ~/NVPACK (Linux)
+
+On Windows host:
+* Install MinGW
+https://sourceforge.net/projects/mingw/files/Installer/mingw-get-setup.exe/download
+
+* Run following in MinGW shell:
+
+On Linux host:
+* Run following in terminal shell:
+
+```
+$ cd /path/to/NVPACK/android-ndk-r12b/build/tools
+$ python make_standalone_toolchain.py --arch arm --api 24 --install-dir ~/android-toolchain-arm
+$ cd GamePlay-deps
+$ mkdir build
+$ cd build
+$ export ANDROID_STANDALONE_TOOLCHAIN=~/android-toolchain-arm
+$ cmake -G"Unix Makefiles" -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain.cmake ..
+$ make
+```
+
 
 ## iOS Setup
 
-Install XCode 6
-
-## iOS Compiling
-
-For arm architecture:
+* Install XCode
+* Run from terminal shell.
+* Builds arm target with the following commands:
 
 ```
 $ cd GamePlay-deps
@@ -81,44 +111,6 @@ $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DIOS_PLATFORM=OS ..
 $ make install
 ```
 
-For x86 we change the IOS_PLATFORM flag:
+* Alternatively: Build simulator x86 target by changing the IOS_PLATFORM parameter:
 
 ` $ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/ios.toolchain.cmake -DIOS_PLATFORM=SIMULATOR .. `
-
-## Android Setup
-
-Install the Android NDK r10e (available here:
-https://developer.android.com/tools/sdk/ndk/index.html).  Once installed you'll
-need to setup a standalone toolchain directory for each of the architectures
-you want to build.  To do that:
-
-```
-$ cd android-ndk-r10e
-$ ./build/tools/make-standalone-toolchain.sh --platform=android-16 --arch=arm --install-dir=/path/to/android-toolchain-arm
-$ ./build/tools/make-standalone-toolchain.sh --platform=android-16 --arch=x86 --install-dir=/path/to/android-toolchain-x86
-```
-
-This will install the standalone toolchain directories in 
-/path/to/android-toolchain-arm (for armeabi-v7a) and /path/to/android-toolchain-x86 (for x86, usually simulator).
-
-## Android Compiling
-
-With the standalone toolchain directories in place, we can run cmake using the
-android.toolchain.cmake.  For this toolchain file we set the
-ANDROID_STANDALONE_TOOLCHAIN environment variable to the appropriate standalone
-toolchain directory.  We do this prior to running cmake.
-
-```
-$ cd GamePlay-deps
-$ mkdir build
-$ cd build
-$ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-arm
-$ cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain.cmake ..
-$ make
-```
-
-For building the simulator version (or any other arch) just change the
-environment variable:
-
-` $ export ANDROID_STANDALONE_TOOLCHAIN=/path/to/android-toolchain-x86 `
-
