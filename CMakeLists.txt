@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 2.8)
 
 project(GamePlay-deps)
 
-
 IF(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND NOT ANDROID)
     SET(LINUX 1)
 ENDIF(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND NOT ANDROID)
@@ -38,10 +37,11 @@ add_subdirectory(png-1.6.15)
 add_subdirectory(ogg-1.3.2)
 add_subdirectory(vorbis-1.3.5)
 if(NOT ANDROID AND NOT IOS)
-    add_subdirectory(assimp-3.3.1)
+    add_subdirectory(assimp-4.0.1)
 endif(NOT ANDROID AND NOT IOS)
 
 set(BUILD_TARGETS
+    assimp
     freetype
     json
     vorbisfile
