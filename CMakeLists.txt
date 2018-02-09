@@ -37,20 +37,11 @@ add_subdirectory(zlib-1.2.8)
 add_subdirectory(png-1.6.15)
 add_subdirectory(ogg-1.3.2)
 add_subdirectory(vorbis-1.3.5)
-<<<<<<< HEAD
 
 set(BUILD_TARGETS
-    bgfx
-    bimg
-    bx
-=======
-if(NOT ANDROID AND NOT IOS)
-    add_subdirectory(assimp-4.0.1)
-endif(NOT ANDROID AND NOT IOS)
-
-set(BUILD_TARGETS
-    assimp
->>>>>>> bdd3252c02c03c2d468b969d62dcbb6840e0afc9
+	bgfx
+	bimg
+	bx
     freetype
     json
     vorbisfile
