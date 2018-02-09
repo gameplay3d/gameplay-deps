@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 
 project(GamePlay-deps)
 
@@ -25,6 +25,7 @@ ENDIF(NOT WIN32)
 file(MAKE_DIRECTORY ${LIBRARY_OUTPUT_PATH})
 message(STATUS "Directory: ${LIBRARY_OUTPUT_PATH}")
 
+add_subdirectory(bgfx-1.0.0)
 add_subdirectory(freetype-2.7.1)
 add_subdirectory(json-7.6.1)
 add_subdirectory(tinyxml2-4.0.1)
@@ -36,12 +37,20 @@ add_subdirectory(zlib-1.2.8)
 add_subdirectory(png-1.6.15)
 add_subdirectory(ogg-1.3.2)
 add_subdirectory(vorbis-1.3.5)
+<<<<<<< HEAD
+
+set(BUILD_TARGETS
+    bgfx
+    bimg
+    bx
+=======
 if(NOT ANDROID AND NOT IOS)
     add_subdirectory(assimp-4.0.1)
 endif(NOT ANDROID AND NOT IOS)
 
 set(BUILD_TARGETS
     assimp
+>>>>>>> bdd3252c02c03c2d468b969d62dcbb6840e0afc9
     freetype
     json
     vorbisfile
