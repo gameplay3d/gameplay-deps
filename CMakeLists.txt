@@ -25,7 +25,7 @@ ENDIF(NOT WIN32)
 file(MAKE_DIRECTORY ${LIBRARY_OUTPUT_PATH})
 message(STATUS "Directory: ${LIBRARY_OUTPUT_PATH}")
 
-add_subdirectory(bgfx-1.0.0)
+add_subdirectory(sdl-2.0.7)
 add_subdirectory(freetype-2.7.1)
 add_subdirectory(json-7.6.1)
 add_subdirectory(tinyxml2-4.0.1)
@@ -39,9 +39,7 @@ add_subdirectory(ogg-1.3.2)
 add_subdirectory(vorbis-1.3.5)
 
 set(BUILD_TARGETS
-	bgfx
-	bimg
-	bx
+    SDL2-static
     freetype
     json
     vorbisfile
