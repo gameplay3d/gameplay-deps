@@ -70,7 +70,7 @@ $ make install
 
 ## Android Setup
 
-* Install NVIDIA CodeWorks for Android 1R6 (includes Android SDK and NDK)
+* Install NVIDIA CodeWorks for Android 1R7 (includes Android SDK and NDK)
 
 https://developer.nvidia.com/codeworks-android
 
