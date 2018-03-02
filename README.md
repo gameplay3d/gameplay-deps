@@ -37,9 +37,17 @@ Build outputs:
 ```
 
 ## Linux setup
-* Install dev tools
+* Install CMake
 ```
-sudo apt-get install build-essential gcc cmake libopenal-dev libgtk2.0-dev curl libpcrecpp0:i386 lib32z1-dev
+sudo apt-get install cmake
+```
+* Install Build SDKs
+```
+sudo apt-get install build-essential clang gcc g++ curl
+```
+* Install Platform SDKs
+```
+sudo apt-get install libx11-xcb-dev libgtk2.0-dev libogg-dev libopenal-dev libtool libasound2-dev libpulse-dev libaudio-dev libx11-dev libxext-dev libxrandr-dev libxcursor-dev libxi-dev libxinerama-dev libxxf86vm-dev libxss-dev libgl1-mesa-dev libesd0-dev
 ```
 * Run commands from terminal shell.
 * Builds x86_64 Release target with the following commands:
