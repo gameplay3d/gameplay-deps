@@ -1,0 +1,17 @@
+branches:
+  only:
+  - master
+  - nextgen
+  - ci
+image: Visual Studio 2015
+clone_depth: 3
+environment:
+  matrix:
+    - CONFIG: Debug
+    - CONFIG: Release
+install:
+  - mkdir build
+  - cd build
+  - cmake -DCMAKE_BUILD_TYPE=%CONFIG% -G "Visual Studio 14 2015 Win64" ..
+build_script:
+  - msbuild GamePlay-deps.sln /property:Configuration=%CONFIG%

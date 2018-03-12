@@ -1,5 +1,6 @@
 GamePlay-deps
 =============
+<img src="https://png.icons8.com/material/1600/mac-os.png" width=20 height=20><img src="https://png.icons8.com/metro/1600/linux.png" width=20 height=20> [![Build Status](https://travis-ci.org/louis-mclaughlin/GamePlay-deps.svg?branch=ci)](https://travis-ci.org/louis-mclaughlin/GamePlay-deps) <img src="https://png.icons8.com/material/1600/windows-logo.png" width=20 height=20> [![Build status](https://ci.appveyor.com/api/projects/status/s9k41xf016w6qbo0?svg=true)](https://ci.appveyor.com/project/louis-mclaughlin/gameplay-deps)
 
 Open-source dependencies for GamePlay.
 

@@ -1,0 +1,35 @@
+branches:
+  only:
+  - master
+  - nextgen
+  - ci
+notifications:
+  email: false
+os:
+  - linux
+  - osx
+git:
+  depth: 3
+sudo: required
+dist: trusty
+language: cpp
+compiler:
+  - gcc
+  - clang
+matrix:
+  include:
+    - { os: linux, compiler: gcc, env: CONFIG=Debug }
+    - { os: linux, compiler: gcc, env: CONFIG=Release }
+    - { os: osx, compiler: clang, env: CONFIG=Debug }
+    - { os: osx, compiler: clang, env: CONFIG=Release }
+  exclude:
+    - { os: linux, compiler: gcc }
+    - { os: linux, compiler: clang }
+    - { os: osx, compiler: gcc }
+    - { os: osx, compiler: clang }
+before_script:
+  - mkdir build
+  - cd build
+  - cmake -DCMAKE_BUILD_TYPE=$CONFIG ..
+script:
+  - make -j2
