@@ -10,6 +10,7 @@ import sys
 import time
 import zipfile
 from pathlib import Path
+from distutils.dir_util import copy_tree
 
 # constants
 ##############################################################################
@@ -19,7 +20,18 @@ CMAKE_UNIX_GENERATOR = "Unix Makefiles"
 
 BUILD_FOLDER = "_build"
 PACKAGE_FOLDER = "_package"
-DEPS_FOLDER = "_deps"
+TOOLS_FOLDER = "_tools"
+ZIP_FOLDER = "_zip"
+
+# platform-architecture
+##############################################################################
+platform_arch = ""
+if sys.platform == "win32":
+    platform_arch = "windows-x86_64"
+elif sys.platform == "darwin":
+    platform_arch = "macos-x86_64"
+else:
+    platform_arch = "linux-x86_64"
 
 
 # function utils
@@ -50,9 +62,9 @@ def cmake_generator_args():
     else:
         return f"-G \"{CMAKE_UNIX_GENERATOR}\""
 
-def cmake_build(folder, generator_args, solution, **kwargs):
-    project_dir = os.getcwd() + os.path.sep + folder
-    build_dir = project_dir + os.path.sep + BUILD_FOLDER
+def cmake_build(dep_folder, generator_args, solution, **kwargs):
+    project_dir = os.path.join(os.getcwd(), dep_folder)
+    build_dir = os.path.join(project_dir, BUILD_FOLDER)
     clear_dir(build_dir)
     cmake_proc = subprocess.Popen(f"cmake {generator_args} ..", cwd=build_dir)
     cmake_proc.wait()
@@ -73,6 +85,10 @@ def copy_files(src_dir, dst_dir, match_exp):
     for filename in glob.glob(os.path.join(src_dir, match_exp)):
         shutil.copy(filename, dst_dir)
 
+def remove_files(src_dir, match_exp):
+    for filename in glob.glob(os.path.join(src_dir, match_exp)):
+        os.remove(filename)
+
 def create_package(src_dir, dst_file):
     package = zipfile.ZipFile(dst_file, 'w', zipfile.ZIP_DEFLATED)
     for root, dirs, files in os.walk(src_dir):
@@ -81,34 +97,26 @@ def create_package(src_dir, dst_file):
             package.write(full_path, os.path.relpath(full_path, src_dir))
     package.close()
 
-
-# package output locations
+# package outputs
 ##############################################################################
 
-# package dest.
-package_dir = os.getcwd() + os.path.sep + PACKAGE_FOLDER
+package_dir = os.path.join(os.getcwd(), PACKAGE_FOLDER)
 clear_dir(package_dir)
-
-# package bin dirs
-package_windows_bin_dir = package_dir + os.path.sep + "windows-x86_64"
-package_linux_bin_dir = package_dir + os.path.sep + "linux-x86_64"
-package_macos_bin_dir = package_dir + os.path.sep + "macos-x86_64"
 
 # glfw
 ##############################################################################
 dep_folder = "glfw-3.3.2"
 print(f"Preparing {dep_folder}...")
-cmake_build(dep_folder, cmake_generator_args(), "GLFW")
-src_dir = dep_folder + os.path.sep + "include" + os.path.sep + "GLFW"
-dst_dir = package_dir + os.path.sep + "include" + os.path.sep + "glfw"
-copy_files(src_dir, dst_dir, "*.*")
+dst_dir = os.path.join(package_dir, "glfw")
+#cmake_build(dep_folder, cmake_generator_args(), "GLFW")
+src_include_dir = os.path.join(dep_folder, "include", "GLFW")
+dst_include_dir = os.path.join(dst_dir, "include", "glfw")
+copy_files(src_include_dir, dst_include_dir, "*.*")
+dst_bin_dir = os.path.join(dst_dir, "bin", platform_arch)
 if sys.platform == "win32":
-    src_dir = dep_folder + os.path.sep + BUILD_FOLDER + os.path.sep + "src" + os.path.sep + "Debug"
-    dst_dir = package_windows_bin_dir + os.path.sep + "debug"
-    copy_files(src_dir, dst_dir, "*.*")
-    src_dir = dep_folder + os.path.sep + BUILD_FOLDER + os.path.sep + "src" + os.path.sep + "Release"
-    dst_dir = package_windows_bin_dir + os.path.sep + "release"
-    copy_files(src_dir, dst_dir, "*.*")
+    src_bin_dir = os.path.join(dep_folder, BUILD_FOLDER, "src")
+    copy_files(os.path.join(src_bin_dir, "Debug"), os.path.join(dst_bin_dir, "debug"), "*.*")
+    copy_files(os.path.join(src_bin_dir, "Release"), os.path.join(dst_bin_dir, "release"), "*.*")
 elif sys.platform == "darwin":
     pass
 else:
@@ -118,22 +126,24 @@ else:
 ##############################################################################
 dep_folder = "glm-0.9.9.8"
 print(f"Preparing {dep_folder}...")
-src_dir = dep_folder + os.path.sep + "glm"
-dst_dir = package_dir + os.path.sep + "include" + os.path.sep + "glm"
-shutil.copytree(src_dir, dst_dir, ignore=shutil.ignore_patterns('*.txt'))
+src_include_dir = os.path.join(dep_folder, "glm")
+dst_include_dir = os.path.join(package_dir, "glm", "include", "glm")
+copy_tree(src_include_dir, dst_include_dir)
+remove_files(dst_include_dir, "*.txt")
+remove_files(dst_include_dir, "**/*.cpp")
 
-# deps zip file
+# zip file
 #############################################################################3
-zip_dir = DEPS_FOLDER
-clear_dir(zip_dir)
 
+zip_dir = ZIP_FOLDER
+clear_dir(zip_dir)
 zip_filename = ""
 if sys.platform == "win32":
     zip_filename = "gameplay-deps-windows.zip"
 elif sys.platform == "darwin":
     zip_filename = "gameplay-deps-macos.zip"
 else:
-    zip_filename = "gameplay-deps-macos.zip"
+    zip_filename = "gameplay-deps-linux.zip"
 
 print(f"Packaging {zip_filename}...")
 create_package(package_dir, os.path.join(zip_dir, zip_filename))

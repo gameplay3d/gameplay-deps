@@ -8,9 +8,9 @@ Packages dependencies for gameplay framework.
 
 Windows
 -------
-- Install Visual Studio 2019
-- Install CMake
-- Install Python
+- Install Visual Studio 2019 - https://visualstudio.microsoft.com/downloads/
+- Install CMake - https://cmake.org/download/
+- Install Python - https://www.python.org/downloads/
 - Run build.bat
 
 Linux / MacOS
