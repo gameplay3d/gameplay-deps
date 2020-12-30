@@ -154,13 +154,14 @@ else:
 
 # imgui
 ##############################################################################
-dep_folder = "imgui-1.8.0-docking"
+dep_folder = "imgui-1.8.0"
 print(f"Preparing {dep_folder}...")
 src_dir = dep_folder
 dst_dir = os.path.join(package_dir, "imgui")
 copy_tree(src_dir, dst_dir)
 clear_dir(os.path.join(dst_dir, "examples"))
 clear_dir(os.path.join(dst_dir, "docs"))
+remove_files(dst_dir, "LICENSE.txt")
 
 # zip file
 ##############################################################################
