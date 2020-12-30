@@ -56,11 +56,11 @@ def init_vsvars():
         if(len(pair) >= 2):
             os.environ[pair[0]] = pair[1]
 
-def cmake_generator_args():
+def cmake_generator_args(user_args):
     if sys.platform == "win32":
-        return f"-G \"{CMAKE_WINDOWS_GENERATOR}\""
+        return f"-G \"{CMAKE_WINDOWS_GENERATOR}\"{user_args}"
     else:
-        return f"-G \"{CMAKE_UNIX_GENERATOR}\""
+        return f"-G \"{CMAKE_UNIX_GENERATOR}\"{user_args}"
 
 def cmake_build(dep_folder, generator_args, solution, **kwargs):
     project_dir = os.path.join(os.getcwd(), dep_folder)
@@ -108,8 +108,8 @@ clear_dir(package_dir)
 dep_folder = "glfw-3.3.2"
 print(f"Preparing {dep_folder}...")
 dst_dir = os.path.join(package_dir, "glfw")
-#cmake_build(dep_folder, cmake_generator_args(), "GLFW")
-src_include_dir = os.path.join(dep_folder, "include", "GLFW")
+cmake_build(dep_folder, cmake_generator_args(""), "GLFW")
+src_include_dir = os.path.join(dep_folder, "in""clude", "GLFW")
 dst_include_dir = os.path.join(dst_dir, "include", "glfw")
 copy_files(src_include_dir, dst_include_dir, "*.*")
 dst_bin_dir = os.path.join(dst_dir, "bin", platform_arch)
@@ -132,8 +132,36 @@ copy_tree(src_include_dir, dst_include_dir)
 remove_files(dst_include_dir, "*.txt")
 remove_files(dst_include_dir, "**/*.cpp")
 
+
+# freetype
+##############################################################################
+dep_folder = "freetype-2.10.4"
+print(f"Preparing {dep_folder}...")
+dst_dir = os.path.join(package_dir, "freetype")
+cmake_build(dep_folder, cmake_generator_args(" -D DISABLE_FORCE_DEBUG_POSTFIX=TRUE"), "freetype")
+src_include_dir = os.path.join(dep_folder, "include", "freetype")
+dst_include_dir = os.path.join(package_dir, "freetype", "include", "freetype")
+copy_tree(src_include_dir, dst_include_dir)
+dst_bin_dir = os.path.join(dst_dir, "bin", platform_arch)
+if sys.platform == "win32":
+    src_bin_dir = os.path.join(dep_folder, BUILD_FOLDER)
+    copy_files(os.path.join(src_bin_dir, "Debug"), os.path.join(dst_bin_dir, "debug"), "*.*")
+    copy_files(os.path.join(src_bin_dir, "Release"), os.path.join(dst_bin_dir, "release"), "*.*")
+elif sys.platform == "darwin":
+    pass
+else:
+    pass
+
+# imgui
+##############################################################################
+dep_folder = "imgui-1.8.0-docking"
+print(f"Preparing {dep_folder}...")
+src_include_dir = dep_folder
+dst_include_dir = os.path.join(package_dir, "imgui")
+copy_tree(src_include_dir, dst_include_dir)
+
 # zip file
-#############################################################################3
+##############################################################################
 
 zip_dir = ZIP_FOLDER
 clear_dir(zip_dir)
