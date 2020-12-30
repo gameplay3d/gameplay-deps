@@ -139,8 +139,8 @@ dep_folder = "freetype-2.10.4"
 print(f"Preparing {dep_folder}...")
 dst_dir = os.path.join(package_dir, "freetype")
 cmake_build(dep_folder, cmake_generator_args(" -D DISABLE_FORCE_DEBUG_POSTFIX=TRUE"), "freetype")
-src_include_dir = os.path.join(dep_folder, "include", "freetype")
-dst_include_dir = os.path.join(package_dir, "freetype", "include", "freetype")
+src_include_dir = os.path.join(dep_folder, "include")
+dst_include_dir = os.path.join(package_dir, "freetype", "include")
 copy_tree(src_include_dir, dst_include_dir)
 dst_bin_dir = os.path.join(dst_dir, "bin", platform_arch)
 if sys.platform == "win32":
@@ -156,9 +156,11 @@ else:
 ##############################################################################
 dep_folder = "imgui-1.8.0-docking"
 print(f"Preparing {dep_folder}...")
-src_include_dir = dep_folder
-dst_include_dir = os.path.join(package_dir, "imgui")
-copy_tree(src_include_dir, dst_include_dir)
+src_dir = dep_folder
+dst_dir = os.path.join(package_dir, "imgui")
+copy_tree(src_dir, dst_dir)
+clear_dir(os.path.join(dst_dir, "examples"))
+clear_dir(os.path.join(dst_dir, "docs"))
 
 # zip file
 ##############################################################################
