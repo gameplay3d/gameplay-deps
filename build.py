@@ -149,8 +149,14 @@ src_include_dir = os.path.join(dep_folder, "glm")
 dst_include_dir = os.path.join(package_dir, "glm", "include", "glm")
 copy_tree(src_include_dir, dst_include_dir)
 remove_files(dst_include_dir, "*.txt")
-remove_files(dst_include_dir, "**/*.cpp")
 
+# cpptoml
+##############################################################################
+dep_folder = "cpptoml-0.1.1"
+print(f"Preparing {dep_folder}...")
+src_include_dir = os.path.join(dep_folder, "include")
+dst_include_dir = os.path.join(package_dir, "cpptoml", "include")
+copy_tree(src_include_dir, dst_include_dir)
 
 # freetype
 ##############################################################################
@@ -184,7 +190,6 @@ remove_files(dst_dir, "LICENSE.txt")
 
 # zip file
 ##############################################################################
-
 zip_dir = ZIP_FOLDER
 clear_dir(zip_dir)
 zip_filename = ""
