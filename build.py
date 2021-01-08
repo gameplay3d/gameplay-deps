@@ -111,7 +111,7 @@ dst_dir = os.path.join(package_dir, "spdlog")
 cmake_build(dep_folder, cmake_generator_args(""), "spdlog")
 src_include_dir = os.path.join(dep_folder, "include", "spdlog")
 dst_include_dir = os.path.join(dst_dir, "include", "spdlog")
-copy_files(src_include_dir, dst_include_dir, "*.*")
+copy_tree(src_include_dir, dst_include_dir)
 dst_bin_dir = os.path.join(dst_dir, "bin", platform_arch)
 if sys.platform == "win32":
     src_bin_dir = os.path.join(dep_folder, BUILD_FOLDER)
