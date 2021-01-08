@@ -103,6 +103,25 @@ def create_package(src_dir, dst_file):
 package_dir = os.path.join(os.getcwd(), PACKAGE_FOLDER)
 clear_dir(package_dir)
 
+# spdlog
+##############################################################################
+dep_folder = "spdlog-1.8.2"
+print(f"Preparing {dep_folder}...")
+dst_dir = os.path.join(package_dir, "spdlog")
+cmake_build(dep_folder, cmake_generator_args(""), "spdlog")
+src_include_dir = os.path.join(dep_folder, "include", "spdlog")
+dst_include_dir = os.path.join(dst_dir, "include", "spdlog")
+copy_files(src_include_dir, dst_include_dir, "*.*")
+dst_bin_dir = os.path.join(dst_dir, "bin", platform_arch)
+if sys.platform == "win32":
+    src_bin_dir = os.path.join(dep_folder, BUILD_FOLDER)
+    copy_files(os.path.join(src_bin_dir, "Debug"), os.path.join(dst_bin_dir, "debug"), "*.*")
+    copy_files(os.path.join(src_bin_dir, "Release"), os.path.join(dst_bin_dir, "release"), "*.*")
+elif sys.platform == "darwin":
+    pass
+else:
+    pass
+
 # glfw
 ##############################################################################
 dep_folder = "glfw-3.3.2"
