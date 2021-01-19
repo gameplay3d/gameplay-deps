@@ -141,6 +141,14 @@ elif sys.platform == "darwin":
 else:
     pass
 
+# stb
+##############################################################################
+dep_folder = "stb-2.37"
+print(f"Preparing {dep_folder}...")
+src_include_dir = os.path.join(dep_folder)
+dst_include_dir = os.path.join(package_dir, "stb", "include")
+copy_files(src_include_dir, dst_include_dir,"*.h")
+
 # glm
 ##############################################################################
 dep_folder = "glm-0.9.9.8"
