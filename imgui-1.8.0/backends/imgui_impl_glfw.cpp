@@ -1,5 +1,5 @@
 // dear imgui: Platform Backend for GLFW
-// This needs to be used along with a Renderer (e.g. OpenGL3, Vulkan..)
+// This needs to be used along with a Renderer (e.g. OpenGL3, Vulkan, WebGPU..)
 // (Info: GLFW is a cross-platform general purpose library for handling windows, inputs, OpenGL/Vulkan graphics context creation, etc.)
 // (Requires: GLFW 3.1+. Prefer GLFW 3.3+ for full feature support.)
 
@@ -19,7 +19,7 @@
 
 // CHANGELOG
 // (minor and older changes stripped away, please see git history for details)
-//  2020-XX-XX: Platform: Added support for multiple windows via the ImGuiPlatformIO interface.
+//  2021-XX-XX: Platform: Added support for multiple windows via the ImGuiPlatformIO interface.
 //  2020-01-17: Inputs: Disable error callback while assigning mouse cursors because some X11 setup don't have them and it generates errors.
 //  2019-12-05: Inputs: Added support for new mouse cursors added in GLFW 3.4+ (resizing cursors, not allowed cursor).
 //  2019-10-18: Misc: Previously installed user callbacks are now restored on shutdown.
@@ -77,7 +77,8 @@ enum GlfwClientApi
 {
     GlfwClientApi_Unknown,
     GlfwClientApi_OpenGL,
-    GlfwClientApi_Vulkan
+    GlfwClientApi_Vulkan,
+    GlfwClientApi_WebGPU
 };
 static GLFWwindow*          g_Window = NULL;    // Main window
 static GlfwClientApi        g_ClientApi = GlfwClientApi_Unknown;
@@ -271,6 +272,11 @@ bool ImGui_ImplGlfw_InitForOpenGL(GLFWwindow* window, bool install_callbacks)
 bool ImGui_ImplGlfw_InitForVulkan(GLFWwindow* window, bool install_callbacks)
 {
     return ImGui_ImplGlfw_Init(window, install_callbacks, GlfwClientApi_Vulkan);
+}
+
+bool ImGui_ImplGlfw_InitForWebGPU(GLFWwindow* window, bool install_callbacks)
+{
+    return ImGui_ImplGlfw_Init(window, install_callbacks, GlfwClientApi_WebGPU);
 }
 
 void ImGui_ImplGlfw_Shutdown()

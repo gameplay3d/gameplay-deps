@@ -115,13 +115,13 @@ On most platforms and when using C++, **you should be able to use a combination 
 Integrating Dear ImGui within your custom engine is a matter of 1) wiring mouse/keyboard/gamepad inputs 2) uploading one texture to your GPU/render engine 3) providing a render function that can bind textures and render textured triangles. The [examples/](https://github.com/ocornut/imgui/tree/master/examples) folder is populated with applications doing just that. If you are an experienced programmer at ease with those concepts, it should take you less than two hours to integrate Dear ImGui in your custom engine. **Make sure to spend time reading the [FAQ](https://www.dearimgui.org/faq), comments, and some of the examples/ application!**
 
 Officially maintained backends/bindings (in repository):
-- Renderers: DirectX9, DirectX10, DirectX11, DirectX12, OpenGL (legacy), OpenGL3/ES/ES2 (modern), Vulkan, Metal.
+- Renderers: DirectX9, DirectX10, DirectX11, DirectX12, Metal, OpenGL (legacy), OpenGL3/ES/ES2 (modern), Vulkan, WebGPU.
 - Platforms: GLFW, SDL2, Win32, Glut, OSX.
 - Frameworks: Emscripten, Allegro5, Marmalade.
 
 [Third-party backends/bindings](https://github.com/ocornut/imgui/wiki/Bindings) wiki page:
-- Languages: C, C# and: Beef, ChaiScript, Crystal, D, Go, Haskell, Haxe/hxcpp, Java, JavaScript, Julia, Kotlin, Lua, Odin, Pascal, PureBasic, Python, Ruby, Rust, Swift...
-- Frameworks: AGS/Adventure Game Studio, Amethyst, bsf, Cinder, Cocos2d-x, Diligent Engine, Flexium, GML/Game Maker Studio2, Godot, GTK3+OpenGL3, Irrlicht Engine, LÖVE+LUA, Magnum, NanoRT, nCine, Nim Game Lib, Ogre, openFrameworks, OSG/OpenSceneGraph, Orx, Photoshop, px_render, Qt/QtDirect3D, SFML, Sokol, Unity, Unreal Engine 4, vtk, Win32 GDI, WxWidgets.
+- Languages: C, C# and: Beef, ChaiScript, Crystal, D, Go, Haskell, Haxe/hxcpp, Java, JavaScript, Julia, Kotlin, Lobster, Lua, Odin, Pascal, PureBasic, Python, Ruby, Rust, Swift...
+- Frameworks: AGS/Adventure Game Studio, Amethyst, Blender, bsf, Cinder, Cocos2d-x, Diligent Engine, Flexium, GML/Game Maker Studio2, GLEQ, Godot, GTK3+OpenGL3, Irrlicht Engine, LÖVE+LUA, Magnum, Monogame, NanoRT, nCine, Nim Game Lib, Nintendo 3DS & Switch (homebrew), Ogre, openFrameworks, OSG/OpenSceneGraph, Orx, Photoshop, px_render, Qt/QtDirect3D, SDL_Renderer, SFML, Sokol, Unity, Unreal Engine 4, vtk, VulkanHpp, VulkanSceneGraph, Win32 GDI, WxWidgets.
 - Note that C bindings ([cimgui](https://github.com/cimgui/cimgui)) are auto-generated, you can use its json/lua output to generate bindings for other languages.
 
 [Useful widgets and extensions](https://github.com/ocornut/imgui/wiki/Useful-Widgets) wiki page:
@@ -131,8 +131,7 @@ Also see [Wiki](https://github.com/ocornut/imgui/wiki) for more links and ideas.
 
 ### Upcoming Changes
 
-Some of the goals for 2020 are:
-- Work on Tables (see [#2957](https://github.com/ocornut/imgui/issues/2957), now merged in master.
+Some of the goals for 2021 are:
 - Work on Docking (see [#2109](https://github.com/ocornut/imgui/issues/2109), in public [docking](https://github.com/ocornut/imgui/tree/docking) branch)
 - Work on Multi-Viewport / Multiple OS windows. (see [#1542](https://github.com/ocornut/imgui/issues/1542), in public [docking](https://github.com/ocornut/imgui/tree/docking) branch looking for feedback)
 - Work on gamepad/keyboard controls. (see [#787](https://github.com/ocornut/imgui/issues/787))
@@ -151,7 +150,7 @@ Custom engine
 Custom engine
 [![screenshot tool](https://raw.githubusercontent.com/wiki/ocornut/imgui/web/v160/editor_white_preview.jpg)](https://raw.githubusercontent.com/wiki/ocornut/imgui/web/v160/editor_white.png)
 
-[Tracy Profiler](https://bitbucket.org/wolfpld/tracy)
+[Tracy Profiler](https://github.com/wolfpld/tracy)
 ![tracy profiler](https://raw.githubusercontent.com/wiki/ocornut/imgui/web/v176/tracy_profiler.png)
 
 ### Support, Frequently Asked Questions (FAQ)
