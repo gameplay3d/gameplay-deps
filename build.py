@@ -66,7 +66,7 @@ def cmake_build(dep_folder, generator_args, solution, **kwargs):
     project_dir = os.path.join(os.getcwd(), dep_folder)
     build_dir = os.path.join(project_dir, BUILD_FOLDER)
     clear_dir(build_dir)
-    cmake_proc = subprocess.Popen(f"cmake {generator_args} ..", cwd=build_dir)
+    cmake_proc = subprocess.Popen(f"cmake {generator_args} ..", cwd=build_dir, shell=True)
     cmake_proc.wait()
     caller_dir = os.getcwd()
     os.chdir(build_dir)
@@ -77,7 +77,8 @@ def cmake_build(dep_folder, generator_args, solution, **kwargs):
         cmd = f"msbuild {solution}.sln /property:Configuration=Release"
         subprocess.run(cmd)
     else:
-        pass
+        cmd = f"make"
+        subprocess.run(cmd)
     os.chdir(caller_dir)
 
 def copy_files(src_dir, dst_dir, match_exp):
@@ -108,19 +109,9 @@ clear_dir(package_dir)
 dep_folder = "spdlog-1.8.2"
 print(f"Preparing {dep_folder}...")
 dst_dir = os.path.join(package_dir, "spdlog")
-cmake_build(dep_folder, cmake_generator_args(""), "spdlog")
 src_include_dir = os.path.join(dep_folder, "include", "spdlog")
 dst_include_dir = os.path.join(dst_dir, "include", "spdlog")
 copy_tree(src_include_dir, dst_include_dir)
-dst_bin_dir = os.path.join(dst_dir, "bin", platform_arch)
-if sys.platform == "win32":
-    src_bin_dir = os.path.join(dep_folder, BUILD_FOLDER)
-    copy_files(os.path.join(src_bin_dir, "Debug"), os.path.join(dst_bin_dir, "debug"), "*.*")
-    copy_files(os.path.join(src_bin_dir, "Release"), os.path.join(dst_bin_dir, "release"), "*.*")
-elif sys.platform == "darwin":
-    pass
-else:
-    pass
 
 # glfw
 ##############################################################################
@@ -132,14 +123,12 @@ src_include_dir = os.path.join(dep_folder, "include", "GLFW")
 dst_include_dir = os.path.join(dst_dir, "include", "glfw")
 copy_files(src_include_dir, dst_include_dir, "*.*")
 dst_bin_dir = os.path.join(dst_dir, "bin", platform_arch)
+src_bin_dir = os.path.join(dep_folder, BUILD_FOLDER, "src")
 if sys.platform == "win32":
-    src_bin_dir = os.path.join(dep_folder, BUILD_FOLDER, "src")
     copy_files(os.path.join(src_bin_dir, "Debug"), os.path.join(dst_bin_dir, "debug"), "*.*")
     copy_files(os.path.join(src_bin_dir, "Release"), os.path.join(dst_bin_dir, "release"), "*.*")
-elif sys.platform == "darwin":
-    pass
 else:
-    pass
+    copy_files(src_bin_dir, dst_bin_dir, "lib*.a")
 
 # stb
 ##############################################################################
@@ -176,14 +165,12 @@ src_include_dir = os.path.join(dep_folder, "include")
 dst_include_dir = os.path.join(package_dir, "freetype", "include")
 copy_tree(src_include_dir, dst_include_dir)
 dst_bin_dir = os.path.join(dst_dir, "bin", platform_arch)
+src_bin_dir = os.path.join(dep_folder, BUILD_FOLDER)
 if sys.platform == "win32":
-    src_bin_dir = os.path.join(dep_folder, BUILD_FOLDER)
     copy_files(os.path.join(src_bin_dir, "Debug"), os.path.join(dst_bin_dir, "debug"), "*.*")
     copy_files(os.path.join(src_bin_dir, "Release"), os.path.join(dst_bin_dir, "release"), "*.*")
-elif sys.platform == "darwin":
-    pass
 else:
-    pass
+    copy_files(src_bin_dir, dst_bin_dir, "lib*.a")
 
 # imgui
 ##############################################################################
