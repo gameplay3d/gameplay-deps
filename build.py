@@ -33,7 +33,6 @@ elif sys.platform == "darwin":
 else:
     platform_arch = "linux-x86_64"
 
-
 # function utils
 ##############################################################################
 
@@ -100,9 +99,17 @@ def create_package(src_dir, dst_file):
 
 # package outputs
 ##############################################################################
-
 package_dir = os.path.join(os.getcwd(), PACKAGE_FOLDER)
 clear_dir(package_dir)
+
+# pybind11
+##############################################################################
+dep_folder = "pybind11-2.6.2"
+print(f"Preparing {dep_folder}...")
+dst_dir = os.path.join(package_dir, "pybind11")
+src_include_dir = os.path.join(dep_folder, "include", "pybind11")
+dst_include_dir = os.path.join(dst_dir, "include", "pybind11")
+copy_tree(src_include_dir, dst_include_dir)
 
 # spdlog
 ##############################################################################
@@ -112,23 +119,6 @@ dst_dir = os.path.join(package_dir, "spdlog")
 src_include_dir = os.path.join(dep_folder, "include", "spdlog")
 dst_include_dir = os.path.join(dst_dir, "include", "spdlog")
 copy_tree(src_include_dir, dst_include_dir)
-
-# glfw
-##############################################################################
-dep_folder = "glfw-3.3.2"
-print(f"Preparing {dep_folder}...")
-dst_dir = os.path.join(package_dir, "glfw")
-cmake_build(dep_folder, cmake_generator_args(" -D USE_MSVC_RUNTIME_LIBRARY_DLL=FALSE"), "GLFW")
-src_include_dir = os.path.join(dep_folder, "include", "GLFW")
-dst_include_dir = os.path.join(dst_dir, "include", "glfw")
-copy_files(src_include_dir, dst_include_dir, "*.*")
-dst_bin_dir = os.path.join(dst_dir, "bin", platform_arch)
-src_bin_dir = os.path.join(dep_folder, BUILD_FOLDER, "src")
-if sys.platform == "win32":
-    copy_files(os.path.join(src_bin_dir, "Debug"), os.path.join(dst_bin_dir, "debug"), "*.*")
-    copy_files(os.path.join(src_bin_dir, "Release"), os.path.join(dst_bin_dir, "release"), "*.*")
-else:
-    copy_files(src_bin_dir, dst_bin_dir, "lib*.a")
 
 # stb
 ##############################################################################
@@ -154,6 +144,23 @@ print(f"Preparing {dep_folder}...")
 src_include_dir = os.path.join(dep_folder, "include")
 dst_include_dir = os.path.join(package_dir, "cpptoml", "include")
 copy_tree(src_include_dir, dst_include_dir)
+
+# glfw
+##############################################################################
+dep_folder = "glfw-3.3.2"
+print(f"Preparing {dep_folder}...")
+dst_dir = os.path.join(package_dir, "glfw")
+cmake_build(dep_folder, cmake_generator_args(" -D USE_MSVC_RUNTIME_LIBRARY_DLL=FALSE"), "GLFW")
+src_include_dir = os.path.join(dep_folder, "include", "GLFW")
+dst_include_dir = os.path.join(dst_dir, "include", "glfw")
+copy_files(src_include_dir, dst_include_dir, "*.*")
+dst_bin_dir = os.path.join(dst_dir, "bin", platform_arch)
+src_bin_dir = os.path.join(dep_folder, BUILD_FOLDER, "src")
+if sys.platform == "win32":
+    copy_files(os.path.join(src_bin_dir, "Debug"), os.path.join(dst_bin_dir, "debug"), "*.*")
+    copy_files(os.path.join(src_bin_dir, "Release"), os.path.join(dst_bin_dir, "release"), "*.*")
+else:
+    copy_files(src_bin_dir, dst_bin_dir, "lib*.a")
 
 # freetype
 ##############################################################################
